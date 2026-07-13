@@ -15,6 +15,7 @@ from anthropic import AsyncAnthropic
 from dotenv import load_dotenv
 
 from .schemas import (
+    RepurposingHypothesis,
     SpecialistClaim,
     SpecialistDraft,
     SynthesisOutput,
@@ -237,3 +238,27 @@ async def run_synthesis(
     )
     return await _structured(MODEL_SYNTH, 2000, _SYNTH_SYSTEM, msg,
                              SynthesisOutput, disable_thinking=True)
+
+
+_REPURPOSING_SYSTEM = (
+    "You propose a drug-repurposing hypothesis. From the provided KNOWN DRUGS that engage this "
+    "human host protein, pick the single best candidate to repurpose as a host-directed "
+    "anti-infective for dengue/Zika — prefer an approved (phase 4) or advanced-clinical drug "
+    "whose current indication is something else (an already-safe, approved drug is the fastest "
+    "path to the clinic for a disease that has no approved treatment). Explain how it engages the "
+    "target, why repurposing is plausible, and specifically why it might avoid the failure modes "
+    "that sank the listed prior dengue trials. The `drug` MUST be one of the provided known drugs. "
+    "If none is credible, set has_candidate to false and leave the other fields empty."
+)
+
+
+async def run_repurposing(gene: str, host_factor_role: str, known_drugs_blob: str,
+                          verified_claims_blob: str, failed_trials_blob: str) -> RepurposingHypothesis | None:
+    msg = (
+        f"Target gene: {gene}\nHost-factor role: {host_factor_role}\n\n"
+        f"KNOWN DRUGS that engage this target (choose the candidate from this list only):\n{known_drugs_blob}\n\n"
+        f"VERIFIED EVIDENCE:\n{verified_claims_blob}\n\n"
+        f"PRIOR FAILED DENGUE DRUG TRIALS (explain how the candidate could avoid these):\n{failed_trials_blob}"
+    )
+    return await _structured(MODEL_SYNTH, 1500, _REPURPOSING_SYSTEM, msg,
+                             RepurposingHypothesis, disable_thinking=True)

@@ -1,425 +1,184 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend,
-} from "recharts";
-import { ShieldCheck, Crosshair, ExternalLink, ArrowUp, Wrench, Check, Sparkles, ArrowLeft, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import DnaHelix from "./DnaHelix";
+import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat } from "lucide-react";
 
-/* ---------- types ---------- */
-interface Citation { source: string; ref: string; url?: string; snippet?: string }
-interface VerifiedClaim {
-  field: string; statement: string; asserted_value: string; basis: string;
-  verdict: string; corrected_value?: string; rationale: string; citations?: Citation[];
+const C = {
+  accent: "#4a90e8", aqua: "#19a06e", warning: "#f5b431", good: "#17b317", critical: "#e0524f",
+  ink: "#f5f5f2", ink2: "#b9b8b0", muted: "#86847c", ring: "#ffffff17", grid: "#262624",
+};
+
+function Reveal({ children, className = "", style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [v, setV] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    if (el.getBoundingClientRect().top < window.innerHeight) { setV(true); return; } // already in view
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); io.disconnect(); } }, { threshold: 0.14 });
+    io.observe(el);
+    const t = setTimeout(() => setV(true), 2500); // safety: never leave content hidden
+    return () => { io.disconnect(); clearTimeout(t); };
+  }, []);
+  return <div ref={ref} className={className} style={{ opacity: v ? 1 : 0, transform: v ? "none" : "translateY(16px)", transition: "opacity .6s ease, transform .6s ease", ...style }}>{children}</div>;
 }
-interface VerifierStats { proposed: number; confirmed: number; corrected: number; unsupported: number; unassessed: number }
-interface Dossier {
-  gene: string; source?: string; host_factor_role?: string; summary?: string;
-  mechanistic_hypothesis?: string; why_prior_failed?: string; recommendation: string;
-  recommendation_rationale?: string; validation_experiment?: string;
-  druggability_score: number; evidence_strength: number; confidence: number;
-  n_known_drugs: number; known_drugs?: string[]; tractability?: string;
-  verified_claims?: VerifiedClaim[]; verifier_stats: VerifierStats; citations?: Citation[]; error?: string;
-}
-interface Payload { n_targets: number; generated_seconds: number; verifier: { caught_pct: number }; dossiers: Dossier[] }
-type ToolChip = { name: string; done: boolean; count: number };
-type Msg = { role: "user" | "assistant"; text: string; tools: ToolChip[]; notice?: string };
 
-/* ---------- palette ---------- */
-const HEX = {
-  accent: "#4a90e8", good: "#17b317", warning: "#f5b431", serious: "#ec835a", critical: "#e0524f",
-  muted: "#86847c", ink2: "#b9b8b0", aqua: "#199e70", grid: "#262624", baseline: "#38383a",
-  ring: "#ffffff17",
-};
-const REC: Record<string, { label: string; color: string }> = {
-  go: { label: "GO", color: HEX.good }, watch: { label: "WATCH", color: HEX.warning },
-  "no-go": { label: "NO-GO", color: HEX.critical }, "insufficient-evidence": { label: "INSUFFICIENT", color: HEX.muted },
-};
-const VERD: Record<string, { label: string; color: string }> = {
-  confirmed: { label: "confirmed", color: HEX.good }, corrected: { label: "corrected", color: HEX.warning },
-  unsupported: { label: "unsupported", color: HEX.critical }, unassessed: { label: "unassessed", color: HEX.muted },
-};
-const rec = (r: string) => REC[r] ?? REC["insufficient-evidence"];
-
-/* ---------- atoms ---------- */
-function Badge({ label, color }: { label: string; color: string }) {
+function VirusIcon({ size = 42, color = C.critical }: { size?: number; color?: string }) {
+  const spikes = Array.from({ length: 10 }, (_, i) => (i * Math.PI * 2) / 10);
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide"
-      style={{ color, background: `${color}1c`, border: `1px solid ${color}4d` }}>
-      <span className="h-1.5 w-1.5 rounded-full" style={{ background: color }} />{label}
-    </span>
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      {spikes.map((a, i) => {
+        const x1 = 50 + Math.cos(a) * 30, y1 = 50 + Math.sin(a) * 30;
+        const x2 = 50 + Math.cos(a) * 44, y2 = 50 + Math.sin(a) * 44;
+        return <g key={i}><line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="3" strokeLinecap="round" /><circle cx={x2} cy={y2} r="4" fill={color} /></g>;
+      })}
+      <circle cx="50" cy="50" r="30" fill={`${color}22`} stroke={color} strokeWidth="3" />
+      <circle cx="43" cy="45" r="4.5" fill={color} opacity="0.7" /><circle cx="58" cy="54" r="5.5" fill={color} opacity="0.7" /><circle cx="52" cy="40" r="3.5" fill={color} opacity="0.7" />
+    </svg>
   );
 }
-function MiniBar({ v, color }: { v: number; color: string }) {
+function TargetIcon({ size = 42, color = C.accent }: { size?: number; color?: string }) {
   return (
-    <div className="h-1.5 w-14 rounded-full" style={{ background: "#ffffff14" }}>
-      <div className="h-full rounded-full" style={{ width: `${Math.round(v * 100)}%`, background: color }} />
-    </div>
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="34" stroke={color} strokeWidth="3" opacity="0.5" />
+      <circle cx="50" cy="50" r="22" stroke={color} strokeWidth="3" opacity="0.8" />
+      <circle cx="50" cy="50" r="7" fill={color} />
+      {[0, 90, 180, 270].map((d) => { const a = (d * Math.PI) / 180; return <line key={d} x1={50 + Math.cos(a) * 30} y1={50 + Math.sin(a) * 30} x2={50 + Math.cos(a) * 46} y2={50 + Math.sin(a) * 46} stroke={color} strokeWidth="3" strokeLinecap="round" />; })}
+    </svg>
   );
 }
 
-const SUGGESTIONS = [
-  "Which host factors are the most druggable? Cite the verifier.",
-  "Assess STT3A as an antiviral target.",
-  "Give me a go / no-go shortlist and explain the top one.",
-  "Why did prior dengue antiviral trials fail?",
+const STEPS = [
+  { icon: <VirusIcon />, n: "01", title: "The virus hijacks your cells", body: "A virus can't reproduce on its own. To copy itself, it grabs onto dozens of your own human proteins — the machinery it can't live without." },
+  { icon: <TargetIcon />, n: "02", title: "Aquiles finds the weak point", body: "Claude reads the world's evidence — drug databases and millions of papers — and ranks which of those human proteins are both essential to the virus and hittable by a drug: the virus's Achilles heel." },
+  { icon: <ShieldCheck size={42} color={C.good} strokeWidth={2} />, n: "03", title: "An independent AI checks everything", body: "The twist: a separate verifier re-checks every single claim against the original source data — catching the mistakes a self-checking AI would confidently keep." },
 ];
 
-/* ---------- page ---------- */
-export default function Page() {
-  const [data, setData] = useState<Payload | null>(null);
-  const [dossiers, setDossiers] = useState<Dossier[]>([]);
-  const [sel, setSel] = useState<string | null>(null);
-  const [msgs, setMsgs] = useState<Msg[]>([]);
-  const [input, setInput] = useState("");
-  const [busy, setBusy] = useState(false);
-  const scroller = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch("/dossiers.json").then((r) => r.json()).then((d: Payload) => {
-      setData(d); setDossiers(d.dossiers); setSel(d.dossiers[0]?.gene ?? null);
-    }).catch(() => {});
-  }, []);
-  useEffect(() => { scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" }); }, [msgs]);
-
-  const agg = useMemo(() => {
-    const a = { proposed: 0, confirmed: 0, corrected: 0, unsupported: 0, unassessed: 0 };
-    for (const d of dossiers) { const s = d.verifier_stats; a.proposed += s.proposed; a.confirmed += s.confirmed; a.corrected += s.corrected; a.unsupported += s.unsupported; a.unassessed += s.unassessed; }
-    return a;
-  }, [dossiers]);
-  const caught = agg.corrected + agg.unsupported;
-  const caughtPct = agg.proposed ? Math.round((100 * caught) / agg.proposed) : 0;
-  const goCount = dossiers.filter((d) => d.recommendation === "go" || d.recommendation === "watch").length;
-  const selected = dossiers.find((d) => d.gene === sel) ?? null;
-  const groups = useMemo(() => { const m: Record<string, Dossier[]> = {}; for (const d of dossiers) (m[d.recommendation] ??= []).push(d); return m; }, [dossiers]);
-
-  async function ask(q: string) {
-    if (!q.trim() || busy) return;
-    setInput("");
-    const history: Msg[] = [...msgs, { role: "user", text: q, tools: [] }];
-    setMsgs([...history, { role: "assistant", text: "", tools: [] }]);
-    setBusy(true);
-    const update = (fn: (m: Msg) => void) => setMsgs((prev) => { const c = [...prev]; fn(c[c.length - 1]); return c; });
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history.map((m) => ({ role: m.role, content: m.text })) }),
-      });
-      const reader = res.body!.getReader();
-      const dec = new TextDecoder();
-      let buf = "";
-      for (;;) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buf += dec.decode(value, { stream: true });
-        const parts = buf.split("\n\n"); buf = parts.pop() ?? "";
-        for (const p of parts) {
-          const line = p.split("\n").find((l) => l.startsWith("data:"));
-          if (!line) continue;
-          const o = JSON.parse(line.slice(5).trim());
-          if (o.type === "text") update((m) => { m.text += o.text; });
-          else if (o.type === "tool_use") update((m) => { m.tools.push({ name: o.name, done: false, count: 0 }); });
-          else if (o.type === "tool_result") {
-            update((m) => { const t = [...m.tools].reverse().find((x) => x.name === o.name && !x.done); if (t) { t.done = true; t.count = (o.dossiers?.length) || 0; } });
-            if (Array.isArray(o.dossiers) && o.dossiers.length) {
-              setDossiers((prev) => { const map = new Map(prev.map((d) => [d.gene, d])); for (const nd of o.dossiers) map.set(nd.gene, nd); return [...map.values()].sort((a, b) => (0.5 * b.druggability_score + 0.3 * b.evidence_strength + 0.2 * b.confidence) - (0.5 * a.druggability_score + 0.3 * a.evidence_strength + 0.2 * a.confidence)); });
-              if (o.dossiers.length === 1) setSel(o.dossiers[0].gene);
-            }
-          } else if (o.type === "notice") update((m) => { m.notice = o.text; });
-          else if (o.type === "error") update((m) => { m.notice = "error: " + o.message; });
-        }
-      }
-    } catch (e) { update((m) => { m.notice = "connection error: " + (e as Error).message; }); }
-    finally { setBusy(false); }
-  }
-
+export default function Landing() {
   return (
-    <main className="mx-auto max-w-[1360px] px-4 py-5 lg:h-screen lg:flex lg:flex-col">
-      {/* header */}
-      <header className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-3 shrink-0">
-        <div className="flex items-center gap-2.5">
-          <span className="grid h-8 w-8 place-items-center rounded-lg" style={{ background: "#4a90e820", border: "1px solid #4a90e855" }}>
-            <ShieldCheck size={18} color={HEX.accent} />
-          </span>
-          <span className="display text-[22px] font-extrabold">Aquiles</span>
-          <span className="mono text-[10.5px] px-2 py-0.5 rounded-md hidden sm:inline" style={{ color: HEX.ink2, background: "#ffffff0d" }}>
-            verified antiviral target discovery
-          </span>
+    <div className="min-h-screen">
+      {/* nav */}
+      <nav className="sticky top-0 z-20 backdrop-blur-md" style={{ background: "#0b0b0acc", borderBottom: `1px solid ${C.grid}` }}>
+        <div className="mx-auto max-w-6xl px-5 h-14 flex items-center gap-2.5">
+          <span className="grid h-7 w-7 place-items-center rounded-lg" style={{ background: "#4a90e820", border: "1px solid #4a90e855" }}><ShieldCheck size={16} color={C.accent} /></span>
+          <span className="display text-lg font-extrabold">Aquiles</span>
+          <Link href="/app" className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-[13px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
+            Launch app <ArrowRight size={15} />
+          </Link>
         </div>
-        <div className="flex items-center gap-2 ml-auto flex-wrap text-[11.5px]">
-          <Chip icon={<Crosshair size={12} />} k="targets" v={String(data?.n_targets ?? dossiers.length)} />
-          <Chip icon={<ShieldCheck size={12} />} k="verifier caught" v={`${caught}/${agg.proposed}`} accent={HEX.warning} big />
-          <Chip icon={<Sparkles size={12} />} k="go / watch" v={String(goCount)} accent={HEX.good} />
+      </nav>
+
+      {/* hero */}
+      <header className="mx-auto max-w-6xl px-5 pt-14 pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center">
+        <div>
+          <div className="mono text-[11px] px-2.5 py-1 rounded-md inline-block mb-5" style={{ color: C.ink2, background: "#ffffff0d" }}>
+            Built with Claude · Life Sciences
+          </div>
+          <h1 className="display text-[clamp(34px,6vw,60px)] font-extrabold leading-[1.02]" style={{ textWrap: "balance" } as React.CSSProperties}>
+            Every virus has an <span style={{ color: C.accent }}>Achilles heel.</span>
+          </h1>
+          <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed" style={{ color: C.ink2 }}>
+            Dengue and Zika have no cure — they survive by hijacking your own cells. <b style={{ color: "#fff" }}>Aquiles</b> finds
+            the human machinery the virus can’t live without, and an <b style={{ color: "#fff" }}>independent AI verifies every
+            piece of evidence</b> before it reaches a scientist.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[14px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
+              Launch Aquiles <ArrowRight size={17} />
+            </Link>
+            <a href="#how" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[14px] font-medium" style={{ color: C.ink2, border: `1px solid ${C.ring}` }}>
+              See how it works
+            </a>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3">
+            {[["No approved antiviral", "for any Aedes-borne arbovirus"], ["6M+ cases", "dengue · Brazil · 2024"], ["61% caught", "of AI claims, by the verifier"]].map(([a, b]) => (
+              <div key={a}><div className="display text-xl font-extrabold" style={{ color: C.warning }}>{a}</div><div className="text-[11.5px]" style={{ color: C.muted }}>{b}</div></div>
+            ))}
+          </div>
+        </div>
+        <div className="relative h-[380px] lg:h-[460px] card overflow-hidden" style={{ background: "radial-gradient(120% 80% at 50% 0%, #14202f 0%, #0f0f0e 70%)" }}>
+          <DnaHelix className="absolute inset-0 h-full w-full" />
+          <div className="absolute bottom-3 left-0 right-0 text-center text-[11px] mono" style={{ color: C.muted }}>
+            the target is written in the host’s own biology
+          </div>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,44fr)_minmax(0,56fr)] gap-3 lg:flex-1 lg:min-h-0">
-        {/* ── chat console ── */}
-        <section className="card flex flex-col min-h-[520px] lg:min-h-0 overflow-hidden">
-          <div className="px-4 py-2.5 border-b flex items-center gap-2" style={{ borderColor: HEX.grid }}>
-            <span className="h-2 w-2 rounded-full" style={{ background: HEX.good }} />
-            <span className="text-[12px] font-medium" style={{ color: HEX.ink2 }}>Aquiles agent</span>
-            <span className="text-[11px]" style={{ color: HEX.muted }}>· Claude plans, calls the verified pipeline, answers</span>
-          </div>
+      {/* how it works */}
+      <section id="how" className="mx-auto max-w-6xl px-5 py-14 border-t" style={{ borderColor: C.grid }}>
+        <Reveal><h2 className="display text-[28px] font-extrabold mb-2">How it works</h2>
+          <p className="text-[14px] mb-9 max-w-2xl" style={{ color: C.muted }}>No bioinformatics required. Ask a question in plain language; Claude does the reasoning and the checking.</p></Reveal>
+        <div className="grid md:grid-cols-3 gap-4">
+          {STEPS.map((s, i) => (
+            <Reveal key={s.n} className="card p-6 flex flex-col gap-3">
+              <div className="flex items-center justify-between">{s.icon}<span className="display text-2xl font-extrabold" style={{ color: "#ffffff18" }}>{s.n}</span></div>
+              <h3 className="display text-[18px] font-bold">{s.title}</h3>
+              <p className="text-[13.5px] leading-relaxed" style={{ color: C.ink2 }}>{s.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-          <div ref={scroller} className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
-            {msgs.length === 0 && (
-              <div className="m-auto text-center max-w-sm">
-                <div className="display text-lg font-bold mb-1.5">Ask about antiviral targets.</div>
-                <p className="text-[12.5px] leading-relaxed mb-4" style={{ color: HEX.muted }}>
-                  Claude reasons over Open Targets, DGIdb and Europe PMC — and an independent verifier checks every
-                  claim against the raw record before it reaches you.
-                </p>
-                <div className="flex flex-col gap-1.5">
-                  {SUGGESTIONS.map((s) => (
-                    <button key={s} onClick={() => ask(s)} className="text-left text-[12.5px] rounded-lg px-3 py-2 transition-colors hover:bg-white/[0.06]"
-                      style={{ background: "#ffffff05", border: `1px solid ${HEX.grid}`, color: HEX.ink2 }}>{s}</button>
-                  ))}
+      {/* the twist */}
+      <section className="mx-auto max-w-6xl px-5 py-14 border-t" style={{ borderColor: C.grid }}>
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 mono text-[11px] px-2.5 py-1 rounded-md mb-4" style={{ color: C.warning, background: "#f5b43115" }}><ShieldQuestion size={13} /> the differentiator</div>
+            <h2 className="display text-[28px] font-extrabold mb-3" style={{ textWrap: "balance" } as React.CSSProperties}>The AI doesn’t get to grade its own homework.</h2>
+            <p className="text-[14.5px] leading-relaxed mb-3" style={{ color: C.ink2 }}>
+              The biggest problem with AI in science is that it checks itself — the reviewer is the same model, with the same
+              blind spots. Aquiles is different: a separate verifier re-reads every claim and confirms it against the{" "}
+              <b style={{ color: "#fff" }}>raw database record</b>, in isolation.
+            </p>
+            <p className="text-[14.5px] leading-relaxed" style={{ color: C.ink2 }}>
+              Across the current target set, the independent verifier <b style={{ color: C.warning }}>caught more than half</b> of
+              the AI’s own claims as unsupported — mistakes a self-checking system would have delivered as fact.
+            </p>
+          </Reveal>
+          <Reveal className="card p-6">
+            <div className="text-[12px] mb-3" style={{ color: C.muted }}>every claim → one of:</div>
+            <div className="flex flex-col gap-2.5">
+              {[["Confirmed", C.good, "the raw record supports it"], ["Corrected", C.warning, "the record says something different"], ["Rejected", C.critical, "no support in the source"]].map(([l, col, d]) => (
+                <div key={l} className="flex items-center gap-3 rounded-lg p-3" style={{ background: "#ffffff06", border: `1px solid ${col}33` }}>
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ background: col as string }} />
+                  <span className="font-semibold text-[13.5px]" style={{ color: col as string }}>{l}</span>
+                  <span className="text-[12.5px]" style={{ color: C.muted }}>{d}</span>
                 </div>
-              </div>
-            )}
-            {msgs.map((m, i) => <ChatBubble key={i} m={m} streaming={busy && i === msgs.length - 1} />)}
-          </div>
-
-          <div className="p-3 border-t" style={{ borderColor: HEX.grid }}>
-            <div className="flex items-end gap-2 rounded-xl px-3 py-2" style={{ background: "#ffffff08", border: `1px solid ${HEX.ring}` }}>
-              <textarea value={input} onChange={(e) => setInput(e.target.value)} rows={1}
-                onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input); } }}
-                placeholder="e.g. assess VCP, or: which targets are most druggable?"
-                className="flex-1 bg-transparent resize-none outline-none text-[13px] leading-5 max-h-28" style={{ color: "#fff" }} />
-              <button onClick={() => ask(input)} disabled={busy || !input.trim()}
-                className="grid h-8 w-8 place-items-center rounded-lg shrink-0 disabled:opacity-40" style={{ background: HEX.accent }}>
-                {busy ? <Loader2 size={15} className="animate-spin" color="#fff" /> : <ArrowUp size={16} color="#fff" />}
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* ── evidence panel ── */}
-        <section className="flex flex-col gap-3 lg:min-h-0 lg:overflow-y-auto pr-0.5">
-          {/* verifier strip */}
-          <div className="card p-3.5 shrink-0">
-            <div className="flex items-center justify-between mb-1.5 flex-wrap gap-2">
-              <div className="text-[12px] font-medium" style={{ color: HEX.ink2 }}>
-                Independent-verifier impact <span style={{ color: HEX.muted }}>· each claim checked vs. the raw DB record, in isolation</span>
-              </div>
-              <div className="text-[11.5px]"><span className="font-semibold" style={{ color: HEX.warning }}>{caughtPct}%</span> <span style={{ color: HEX.muted }}>caught</span></div>
-            </div>
-            <div className="flex h-5 w-full overflow-hidden rounded-md" style={{ gap: 2 }}>
-              {(["confirmed", "corrected", "unsupported", "unassessed"] as const).map((k) => {
-                const val = agg[k]; const total = agg.proposed + agg.unassessed; if (!val || !total) return null;
-                return <div key={k} className="grid place-items-center text-[10.5px] font-semibold text-black/80" style={{ width: `${(100 * val) / total}%`, background: VERD[k].color, minWidth: 20 }} title={`${k}: ${val}`}>{val}</div>;
-              })}
-            </div>
-            <div className="mt-1.5 flex flex-wrap gap-x-3.5 gap-y-1 text-[10.5px]" style={{ color: HEX.muted }}>
-              {(["confirmed", "corrected", "unsupported", "unassessed"] as const).map((k) => (
-                <span key={k} className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm" style={{ background: VERD[k].color }} />{k} · {agg[k]}</span>
               ))}
-              <span className="ml-auto italic">a self-check keeps all {agg.proposed}; this kept {agg.confirmed}.</span>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* why it can't escape */}
+      <section className="mx-auto max-w-6xl px-5 py-14 border-t" style={{ borderColor: C.grid }}>
+        <Reveal className="card p-8 flex flex-col md:flex-row items-start gap-6" style={{ background: "radial-gradient(120% 120% at 100% 0%, #15251c 0%, #0f0f0e 70%)" }}>
+          <div className="grid h-12 w-12 place-items-center rounded-xl shrink-0" style={{ background: "#19a06e22", border: "1px solid #19a06e55" }}><Repeat size={24} color={C.aqua} /></div>
+          <div>
+            <h2 className="display text-[24px] font-extrabold mb-2">Why the virus can’t just mutate around it</h2>
+            <p className="text-[14.5px] leading-relaxed max-w-3xl" style={{ color: C.ink2 }}>
+              Most antivirals attack the virus directly — so it evolves resistance fast. Aquiles targets the <b style={{ color: "#fff" }}>human</b> proteins
+              instead. The virus can’t rewrite your DNA, so a host-directed drug is far harder to escape — a more durable
+              weapon against fast-mutating arboviruses, and potentially one that works across dengue, Zika and chikungunya at once.
+            </p>
           </div>
+        </Reveal>
+      </section>
 
-          {/* landscape */}
-          <div className="card p-3.5 shrink-0">
-            <div className="text-[12px] font-medium mb-0.5" style={{ color: HEX.ink2 }}>Target landscape</div>
-            <div className="text-[10.5px] mb-1" style={{ color: HEX.muted }}>druggability × verified evidence · bubble = known drugs · click a target</div>
-            <div style={{ height: 230 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <ScatterChart margin={{ top: 8, right: 12, bottom: 20, left: 0 }}>
-                  <CartesianGrid stroke={HEX.grid} />
-                  <XAxis type="number" dataKey="druggability_score" domain={[0, 1]} tick={{ fill: HEX.muted, fontSize: 10 }} stroke={HEX.baseline} />
-                  <YAxis type="number" dataKey="evidence_strength" domain={[0, 1]} tick={{ fill: HEX.muted, fontSize: 10 }} stroke={HEX.baseline} />
-                  <ZAxis type="number" dataKey="n_known_drugs" range={[60, 380]} />
-                  <Tooltip cursor={{ strokeDasharray: "3 3", stroke: HEX.baseline }} content={<Tip />} />
-                  <Legend wrapperStyle={{ fontSize: 10, color: HEX.muted }} />
-                  {Object.entries(groups).map(([r, ds]) => (
-                    <Scatter key={r} name={rec(r).label} data={ds} fill={rec(r).color} fillOpacity={0.85} stroke={rec(r).color} isAnimationActive={false}
-                      onClick={(d: unknown) => { const g = (d as { gene?: string })?.gene; if (g) setSel(g); }} style={{ cursor: "pointer" }} />
-                  ))}
-                </ScatterChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* selected dossier | table */}
-          {selected ? <DossierView d={selected} onBack={() => setSel(null)} /> : <RankedTable dossiers={dossiers} onPick={setSel} />}
-        </section>
-      </div>
-      <footer className="mt-2 text-[10.5px] shrink-0" style={{ color: HEX.muted }}>
-        Evidence: Open Targets · DGIdb · Europe PMC (public). Human-in-the-loop; not a diagnosis or treatment recommendation. Built with Claude.
-      </footer>
-    </main>
-  );
-}
-
-/* ---------- chat bubble ---------- */
-function ChatBubble({ m, streaming }: { m: Msg; streaming: boolean }) {
-  if (m.role === "user") {
-    return <div className="self-end max-w-[85%] rounded-2xl rounded-br-md px-3.5 py-2 text-[13px] fadein" style={{ background: HEX.accent, color: "#fff" }}>{m.text}</div>;
-  }
-  return (
-    <div className="self-start max-w-[92%] fadein">
-      {m.tools.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-1.5">
-          {m.tools.map((t, i) => (
-            <span key={i} className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-[11px] mono" style={{ background: "#ffffff08", border: `1px solid ${HEX.grid}`, color: t.done ? HEX.aqua : HEX.muted }}>
-              {t.done ? <Check size={12} /> : <Loader2 size={12} className="animate-spin" />}{t.name}{t.done && t.count ? ` · ${t.count}` : ""}
-            </span>
-          ))}
+      {/* final CTA */}
+      <section className="mx-auto max-w-6xl px-5 pb-24 pt-6">
+        <Reveal className="card p-10 text-center" style={{ background: "radial-gradient(120% 120% at 50% 0%, #14202f 0%, #0f0f0e 75%)" }}>
+          <h2 className="display text-[30px] font-extrabold mb-2" style={{ textWrap: "balance" } as React.CSSProperties}>Ask the agent. Trust the evidence.</h2>
+          <p className="text-[14px] mb-6 max-w-lg mx-auto" style={{ color: C.ink2 }}>See Claude reason over real biomedical data — with every claim independently verified in front of you.</p>
+          <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
+            Launch Aquiles <ArrowRight size={18} />
+          </Link>
+        </Reveal>
+        <div className="mt-8 text-center text-[11px]" style={{ color: C.muted }}>
+          Evidence: Open Targets · DGIdb · Europe PMC. Human-in-the-loop; not a diagnosis or treatment recommendation. Built with Claude.
         </div>
-      )}
-      <div className="rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap" style={{ background: "#ffffff07", border: `1px solid ${HEX.grid}`, color: HEX.ink2 }}>
-        {renderMd(m.text)}
-        {streaming && <span className="caret" style={{ color: HEX.accent }}>▍</span>}
-        {m.notice && <div className="mt-1.5 text-[11px]" style={{ color: HEX.serious }}>{m.notice}</div>}
-      </div>
-    </div>
-  );
-}
-// tiny markdown: **bold** + line breaks
-function renderMd(t: string) {
-  return t.split(/(\*\*[^*]+\*\*)/g).map((p, i) =>
-    p.startsWith("**") && p.endsWith("**") ? <b key={i} style={{ color: "#fff" }}>{p.slice(2, -2)}</b> : <span key={i}>{p}</span>);
-}
-
-function Chip({ icon, k, v, accent, big }: { icon: React.ReactNode; k: string; v: string; accent?: string; big?: boolean }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1" style={{ background: "#ffffff08", border: `1px solid ${HEX.ring}` }}>
-      <span style={{ color: HEX.muted }}>{icon}</span>
-      <span style={{ color: HEX.muted }}>{k}</span>
-      <span className={`tabnum font-semibold ${big ? "text-[14px]" : ""}`} style={{ color: accent ?? "#fff" }}>{v}</span>
-    </span>
-  );
-}
-function Tip({ active, payload }: { active?: boolean; payload?: Array<{ payload: Dossier }> }) {
-  if (!active || !payload?.length) return null;
-  const d = payload[0].payload;
-  return (
-    <div className="card px-3 py-2 text-[11.5px]" style={{ background: "#0f0f0e", borderColor: HEX.baseline }}>
-      <div className="mono font-semibold">{d.gene}</div>
-      <div style={{ color: HEX.ink2 }}>druggability {d.druggability_score.toFixed(2)} · evidence {d.evidence_strength.toFixed(2)}</div>
-      <div style={{ color: HEX.muted }}>{d.n_known_drugs} known drugs · {rec(d.recommendation).label}</div>
-    </div>
-  );
-}
-
-function RankedTable({ dossiers, onPick }: { dossiers: Dossier[]; onPick: (g: string) => void }) {
-  return (
-    <div className="card overflow-hidden">
-      <div className="px-4 pt-3 pb-2 text-[12px] font-medium" style={{ color: HEX.ink2 }}>Ranked targets <span style={{ color: HEX.muted }}>· click to inspect</span></div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-[12px]">
-          <thead><tr className="text-left" style={{ color: HEX.muted }}>
-            <th className="px-4 py-1.5 font-medium">gene</th><th className="px-2 py-1.5 font-medium">rec</th>
-            <th className="px-2 py-1.5 font-medium">drug</th><th className="px-2 py-1.5 font-medium">evidence</th><th className="px-2 py-1.5 font-medium">verifier</th>
-          </tr></thead>
-          <tbody>
-            {dossiers.map((d) => {
-              const c = d.verifier_stats.corrected + d.verifier_stats.unsupported;
-              return (
-                <tr key={d.gene} onClick={() => onPick(d.gene)} className="cursor-pointer border-t hover:bg-white/[0.04]" style={{ borderColor: HEX.grid }}>
-                  <td className="px-4 py-1.5 mono font-semibold">{d.gene}</td>
-                  <td className="px-2 py-1.5"><Badge {...rec(d.recommendation)} /></td>
-                  <td className="px-2 py-1.5"><div className="flex items-center gap-2"><MiniBar v={d.druggability_score} color={HEX.accent} /><span className="tabnum" style={{ color: HEX.ink2 }}>{d.druggability_score.toFixed(2)}</span></div></td>
-                  <td className="px-2 py-1.5"><div className="flex items-center gap-2"><MiniBar v={d.evidence_strength} color={HEX.aqua} /><span className="tabnum" style={{ color: HEX.ink2 }}>{d.evidence_strength.toFixed(2)}</span></div></td>
-                  <td className="px-2 py-1.5 tabnum" style={{ color: c ? HEX.warning : HEX.muted }}>{c}/{d.verifier_stats.proposed}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function DossierView({ d, onBack }: { d: Dossier; onBack: () => void }) {
-  const claims = d.verified_claims ?? [];
-  return (
-    <div className="card p-4 flex flex-col gap-3 fadein">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <button onClick={onBack} className="inline-flex items-center gap-1 text-[11px] mb-1 hover:opacity-80" style={{ color: HEX.muted }}><ArrowLeft size={12} />all targets</button>
-          <div className="flex items-center gap-2 flex-wrap"><h2 className="text-xl font-bold mono">{d.gene}</h2><Badge {...rec(d.recommendation)} /></div>
-          {d.source && <div className="text-[10.5px] mt-0.5" style={{ color: HEX.muted }}>{d.source}</div>}
-        </div>
-        <div className="text-right shrink-0"><div className="text-[10.5px]" style={{ color: HEX.muted }}>confidence</div><div className="display text-2xl font-extrabold tabnum" style={{ color: HEX.accent }}>{d.confidence.toFixed(2)}</div></div>
-      </div>
-      {d.summary && <p className="text-[12.5px] leading-relaxed" style={{ color: HEX.ink2 }}>{d.summary}</p>}
-      <div className="grid grid-cols-3 gap-2 text-center">
-        <Stat label="druggability" v={d.druggability_score} note={d.tractability} color={HEX.accent} />
-        <Stat label="evidence" v={d.evidence_strength} color={HEX.good} />
-        <div className="rounded-lg p-2" style={{ background: "#ffffff08" }}><div className="text-[10.5px]" style={{ color: HEX.muted }}>known drugs</div><div className="text-lg font-semibold tabnum">{d.n_known_drugs}</div></div>
-      </div>
-      <VerifierMini stats={d.verifier_stats} />
-      {d.mechanistic_hypothesis && <Field title="Mechanistic hypothesis" body={d.mechanistic_hypothesis} />}
-      {d.why_prior_failed && <Field title="Why prior antiviral trials failed" body={d.why_prior_failed} accent={HEX.serious} />}
-      {d.validation_experiment && <Field title="Suggested validation" body={d.validation_experiment} />}
-      <div>
-        <div className="text-[12px] font-medium mb-1.5" style={{ color: HEX.ink2 }}>Verified claims <span style={{ color: HEX.muted }}>· specialist claim → independent verdict vs. the raw record</span></div>
-        <div className="flex flex-col gap-1.5">{claims.map((c, i) => <ClaimRow key={i} c={c} />)}</div>
-      </div>
-      {!!d.citations?.length && (
-        <div className="flex flex-wrap gap-1.5 pt-0.5">
-          {d.citations!.map((c, i) => (
-            <a key={i} href={c.url || "#"} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[10.5px] hover:bg-white/10" style={{ background: "#ffffff0d", color: HEX.ink2 }}>
-              <ExternalLink size={11} />{c.source}: {c.ref}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-function VerifierMini({ stats }: { stats: VerifierStats }) {
-  const total = stats.proposed + stats.unassessed;
-  const caught = stats.corrected + stats.unsupported;
-  if (!total) return null;
-  return (
-    <div className="rounded-lg p-2.5" style={{ background: "#ffffff06" }}>
-      <div className="flex items-center justify-between mb-1.5 text-[10.5px]" style={{ color: HEX.muted }}>
-        <span>this target: independent verifier checked {stats.proposed} claims</span>
-        <span><span className="font-semibold" style={{ color: HEX.warning }}>{caught}</span> caught</span>
-      </div>
-      <div className="flex h-3.5 w-full overflow-hidden rounded" style={{ gap: 2 }}>
-        {(["confirmed", "corrected", "unsupported", "unassessed"] as const).map((k) =>
-          stats[k] ? <div key={k} style={{ width: `${(100 * stats[k]) / total}%`, background: VERD[k].color, minWidth: 10 }} title={`${k}: ${stats[k]}`} /> : null)}
-      </div>
-    </div>
-  );
-}
-function Stat({ label, v, note, color }: { label: string; v: number; note?: string; color: string }) {
-  return (
-    <div className="rounded-lg p-2" style={{ background: "#ffffff08" }}>
-      <div className="text-[10.5px]" style={{ color: HEX.muted }}>{label}</div>
-      <div className="text-lg font-semibold tabnum" style={{ color }}>{v.toFixed(2)}</div>
-      {note && <div className="text-[9px] leading-tight" style={{ color: HEX.muted }}>{note}</div>}
-    </div>
-  );
-}
-function Field({ title, body, accent }: { title: string; body: string; accent?: string }) {
-  return (
-    <div className="rounded-lg p-2.5" style={{ background: "#ffffff06", borderLeft: `2px solid ${accent ?? HEX.accent}` }}>
-      <div className="text-[10.5px] font-medium mb-0.5" style={{ color: accent ?? HEX.ink2 }}>{title}</div>
-      <div className="text-[12px] leading-relaxed" style={{ color: HEX.ink2 }}>{body}</div>
-    </div>
-  );
-}
-function ClaimRow({ c }: { c: VerifiedClaim }) {
-  const v = VERD[c.verdict] ?? VERD.unassessed;
-  return (
-    <div className="rounded-lg p-2" style={{ background: "#ffffff06", border: `1px solid ${v.color}26` }}>
-      <div className="flex items-start gap-2">
-        <Badge label={v.label} color={v.color} />
-        <div className="min-w-0 flex-1">
-          <div className="text-[11.5px]" style={{ color: "#fff" }}><span className="mono text-[9.5px] px-1 py-0.5 rounded" style={{ background: "#ffffff0d", color: HEX.muted }}>{c.field}</span> {c.statement}</div>
-          <div className="mt-1 text-[10.5px]" style={{ color: HEX.muted }}>
-            asserted <span style={{ color: HEX.ink2 }}>“{c.asserted_value}”</span>
-            {c.corrected_value ? <> → corrected <span style={{ color: HEX.warning }}>“{c.corrected_value}”</span></> : null}
-          </div>
-          {c.rationale && <div className="mt-1 text-[10.5px] italic" style={{ color: v.color }}>{c.rationale}</div>}
-        </div>
-      </div>
+      </section>
     </div>
   );
 }

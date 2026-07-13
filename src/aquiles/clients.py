@@ -70,7 +70,7 @@ query ($id: String!) {
     approvedName
     tractability { modality label value }
     safetyLiabilities { event }
-    knownDrugs { count rows { drug { name } phase mechanismOfAction } }
+    knownDrugs { count rows { drug { name } phase mechanismOfAction disease { name } } }
   }
 }
 """
@@ -103,7 +103,8 @@ async def fetch_open_targets(client: httpx.AsyncClient, gene: str) -> dict:
             if name and name not in seen:
                 seen.add(name)
                 drugs.append({"name": name, "phase": row.get("phase"),
-                              "moa": row.get("mechanismOfAction")})
+                              "moa": row.get("mechanismOfAction"),
+                              "disease": (row.get("disease") or {}).get("name")})
         out.update({
             "available": True,
             "ensembl_id": ensembl,

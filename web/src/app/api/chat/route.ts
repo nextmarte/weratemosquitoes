@@ -56,9 +56,11 @@ async function gradio(apiName: string, data: unknown[]): Promise<unknown> {
   return Array.isArray(payload) ? payload[0] : payload;
 }
 
+type Repurpose = { has_candidate: boolean; drug: string; approved_for: string; why_it_might_succeed: string };
 type Dossier = Record<string, unknown> & {
   gene: string; recommendation: string; druggability_score: number; evidence_strength: number;
   confidence: number; verifier_stats: { proposed: number; corrected: number; unsupported: number };
+  repurposing?: Repurpose | null;
 };
 
 // execute a tool; return { forClaude: compact string, dossiers: full for the UI }
@@ -71,7 +73,7 @@ async function execTool(name: string, input: Record<string, unknown>) {
     const res = (await gradio("prioritize_targets", [])) as { dossiers: Dossier[] };
     const ds = res.dossiers || [];
     const compact = ds.slice(0, 10).map((d) =>
-      `${d.gene}: ${d.recommendation}, druggability ${d.druggability_score.toFixed(2)}, evidence ${d.evidence_strength.toFixed(2)}, verifier caught ${d.verifier_stats.corrected + d.verifier_stats.unsupported}/${d.verifier_stats.proposed}`
+      `${d.gene}: ${d.recommendation}, druggability ${d.druggability_score.toFixed(2)}, evidence ${d.evidence_strength.toFixed(2)}, verifier caught ${d.verifier_stats.corrected + d.verifier_stats.unsupported}/${d.verifier_stats.proposed}${d.repurposing?.has_candidate ? `, repurposing candidate ${d.repurposing.drug}` : ""}`
     ).join("\n");
     return { forClaude: `Ranked targets (top 10):\n${compact}`, dossiers: ds };
   }
@@ -81,10 +83,13 @@ async function execTool(name: string, input: Record<string, unknown>) {
       summary?: string; why_prior_failed?: string; verified_claims?: Array<{ field: string; verdict: string; asserted_value: string; rationale: string }>;
     };
     const claims = (d.verified_claims || []).map((c) => `- [${c.verdict}] ${c.field}: "${c.asserted_value}" — ${c.rationale}`).join("\n");
+    const rp = d.repurposing?.has_candidate
+      ? `\nRepurposing candidate: ${d.repurposing.drug} (currently for ${d.repurposing.approved_for}) — why it might succeed: ${d.repurposing.why_it_might_succeed}`
+      : "";
     const forClaude =
       `${d.gene} — recommendation ${d.recommendation}, confidence ${d.confidence.toFixed(2)}, ` +
       `druggability ${d.druggability_score.toFixed(2)}, evidence ${d.evidence_strength.toFixed(2)}.\n` +
-      `Summary: ${d.summary || ""}\nWhy prior trials failed: ${d.why_prior_failed || "n/a"}\n` +
+      `Summary: ${d.summary || ""}\nWhy prior trials failed: ${d.why_prior_failed || "n/a"}${rp}\n` +
       `Independently verified claims:\n${claims}`;
     return { forClaude, dossiers: [d] };
   }

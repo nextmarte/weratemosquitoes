@@ -62,6 +62,18 @@ class VerifierVerdict(BaseModel):
     )
 
 
+class RepurposingHypothesis(BaseModel):
+    has_candidate: bool = Field(
+        description="True if a credible drug-repurposing candidate exists among the provided known drugs.")
+    drug: str = Field(default="", description="The candidate drug (MUST be one of the provided known drugs).")
+    approved_for: str = Field(default="", description="The drug's current/original indication (e.g. an oncology or antiparasitic use).")
+    mechanism: str = Field(default="", description="How the drug engages this human host-factor target.")
+    rationale: str = Field(default="", description="Why repurposing it as a host-directed antiviral for dengue/Zika is plausible.")
+    why_it_might_succeed: str = Field(default="", description="Why it could avoid the failure modes that sank prior dengue drug trials.")
+    confidence: str = Field(default="", description="High | Medium | Low, with a one-clause reason.")
+    caveats: str = Field(default="", description="Key risks or unknowns.")
+
+
 class SynthesisOutput(BaseModel):
     host_factor_role: str = Field(description="How the arbovirus depends on this host factor.")
     summary: str = Field(description="2-3 sentence target summary for a scientist.")
@@ -136,4 +148,5 @@ class TargetDossier(BaseModel):
     verified_claims: list[VerifiedClaim] = Field(default_factory=list)
     verifier_stats: VerifierStats = Field(default_factory=VerifierStats)
     citations: list[Citation] = Field(default_factory=list)
+    repurposing: RepurposingHypothesis | None = None
     error: str = ""

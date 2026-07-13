@@ -140,6 +140,19 @@ async def assess_target(gene: str) -> TargetDossier:
     synth = (await agents.run_synthesis(gene, role, survivors_blob, trials_blob, scores_blob)
              if survivors else None)
 
+    # repurposing layer: for a druggable target with known drugs, propose an actionable candidate.
+    # Draw candidates from Open Targets (approved drugs + indication) AND DGIdb (tool compounds).
+    ot_drugs = ot.get("known_drugs") or []
+    dg_drugs = raw.get("dgidb", {}).get("interactions") or []
+    repurposing = None
+    if (ot_drugs or dg_drugs) and survivors:
+        lines = [f"- {d.get('name')} (phase {d.get('phase')}; indication: {d.get('disease') or 'n/a'}; "
+                 f"MoA: {d.get('moa') or 'n/a'})" for d in ot_drugs[:8]]
+        lines += [f"- {d.get('drug')} (DGIdb; interaction types: {d.get('types')})"
+                  for d in dg_drugs[:8] if d.get("drug")]
+        kd_blob = "\n".join(lines)
+        repurposing = await agents.run_repurposing(gene, role, kd_blob, survivors_blob, trials_blob)
+
     citations = [Citation(source="host-factor screen", ref=provenance)] if provenance else []
     if ot.get("available"):
         citations.append(Citation(source="Open Targets", ref=ot.get("ensembl_id", ""),
@@ -153,6 +166,7 @@ async def assess_target(gene: str) -> TargetDossier:
         druggability_score=drug_score, evidence_strength=evidence, confidence=confidence,
         n_known_drugs=len(known_drugs), known_drugs=known_drugs[:10], tractability=tract_label,
         verified_claims=verified, verifier_stats=stats, citations=citations,
+        repurposing=(repurposing if repurposing and repurposing.has_candidate else None),
     )
     if synth is not None:
         dossier.host_factor_role = synth.host_factor_role or role
