@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import DnaHelix from "./DnaHelix";
-import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat } from "lucide-react";
+import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat, Database, Workflow } from "lucide-react";
 
 const C = {
   accent: "#4a90e8", aqua: "#19a06e", warning: "#f5b431", good: "#17b317", critical: "#e0524f",
@@ -53,6 +53,21 @@ const STEPS = [
   { icon: <VirusIcon />, n: "01", title: "The virus hijacks your cells", body: "A virus can't reproduce on its own. To copy itself, it grabs onto dozens of your own human proteins — the machinery it can't live without." },
   { icon: <TargetIcon />, n: "02", title: "Aquiles finds the weak point", body: "Claude reads the world's evidence — drug databases and millions of papers — and ranks which of those human proteins are both essential to the virus and hittable by a drug: the virus's Achilles heel." },
   { icon: <ShieldCheck size={42} color={C.good} strokeWidth={2} />, n: "03", title: "An independent AI checks everything", body: "The twist: a separate verifier re-checks every single claim against the original source data — catching the mistakes a self-checking AI would confidently keep." },
+];
+
+const SOURCES: [string, string][] = [
+  ["Open Targets", "target druggability (tractability buckets), approved & clinical-stage drugs, and safety liabilities"],
+  ["DGIdb", "drug–gene interactions — the approved drugs and tool compounds that engage each target"],
+  ["Europe PMC", "peer-reviewed literature and abstracts, used for the prior-evidence checks"],
+  ["Krogan interactome", "the Dengue/Zika host–pathogen protein map — Shah et al., Cell 2018"],
+  ["CRISPR screens", "flavivirus host-dependency factors — Marceau et al., Nature 2016; Zhang et al., Cell Reports 2016"],
+  ["Trial corpus", "documented dengue drug-trial failures (chloroquine, celgosivir, balapiravir, ivermectin…) and why each failed"],
+];
+const METHOD: string[] = [
+  "A specialist agent gathers evidence from the databases and makes concrete, checkable claims.",
+  "An independent verifier re-checks every claim, in an isolated context, against the raw database record — confirmed, corrected, or rejected.",
+  "Druggability and evidence-strength scores are computed in code from the verified evidence — not written by the model.",
+  "A synthesis agent writes a go / watch / no-go dossier and, where a drug exists, a repurposing hypothesis — using only verified claims.",
 ];
 
 export default function Landing() {
@@ -164,6 +179,45 @@ export default function Landing() {
             </p>
           </div>
         </Reveal>
+      </section>
+
+      {/* data & method */}
+      <section id="method" className="mx-auto max-w-6xl px-5 py-14 border-t" style={{ borderColor: C.grid }}>
+        <Reveal>
+          <h2 className="display text-[28px] font-extrabold mb-2">Data &amp; method — nothing hidden</h2>
+          <p className="text-[14px] mb-9 max-w-2xl" style={{ color: C.muted }}>
+            Every input is a public database or a peer-reviewed paper. Every number is computed from evidence that
+            survived independent verification.
+          </p>
+        </Reveal>
+        <div className="grid lg:grid-cols-2 gap-4">
+          <Reveal className="card p-6">
+            <div className="flex items-center gap-2 mb-4"><Database size={18} color={C.accent} /><h3 className="display text-[17px] font-bold">Data sources</h3></div>
+            <ul className="flex flex-col gap-3 text-[13px]">
+              {SOURCES.map(([name, what]) => (
+                <li key={name} className="flex gap-2.5">
+                  <span className="mono text-[10.5px] px-1.5 py-0.5 rounded h-fit whitespace-nowrap" style={{ background: "#ffffff0d", color: C.ink2 }}>{name}</span>
+                  <span style={{ color: C.ink2 }}>{what}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal className="card p-6">
+            <div className="flex items-center gap-2 mb-4"><Workflow size={18} color={C.aqua} /><h3 className="display text-[17px] font-bold">How a target is scored</h3></div>
+            <ol className="flex flex-col gap-3 text-[13px]">
+              {METHOD.map((m, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="display text-[13px] font-extrabold shrink-0 mt-px" style={{ color: C.accent }}>{i + 1}</span>
+                  <span style={{ color: C.ink2 }}>{m}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-4 pt-3 text-[11.5px] leading-relaxed" style={{ borderTop: `1px solid ${C.grid}`, color: C.muted }}>
+              Models: Claude Haiku 4.5 (evidence &amp; verification), Claude Opus 4.8 as a fallback. Human-in-the-loop —
+              every claim links back to its source; not a diagnosis or treatment recommendation.
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* final CTA */}
