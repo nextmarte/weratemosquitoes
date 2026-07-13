@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import DnaHelix from "./DnaHelix";
-import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat, Database, Workflow } from "lucide-react";
+import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat, Database, Workflow, Volume2, VolumeX } from "lucide-react";
 
 const C = {
   accent: "#4a90e8", aqua: "#19a06e", warning: "#f5b431", good: "#17b317", critical: "#e0524f",
@@ -71,14 +71,27 @@ const METHOD: string[] = [
 ];
 
 export default function Landing() {
+  const [sound, setSound] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const toggleSound = () => {
+    const a = audioRef.current; if (!a) return;
+    if (sound) { a.pause(); setSound(false); }
+    else { a.volume = 0.3; a.play().then(() => setSound(true)).catch(() => {}); }
+  };
   return (
     <div className="min-h-screen">
+      <audio ref={audioRef} src="/gen/ambient.wav" loop preload="none" />
       {/* nav */}
       <nav className="sticky top-0 z-20 backdrop-blur-md" style={{ background: "#0b0b0acc", borderBottom: `1px solid ${C.grid}` }}>
         <div className="mx-auto max-w-6xl px-5 h-14 flex items-center gap-2.5">
           <span className="grid h-7 w-7 place-items-center rounded-lg" style={{ background: "#4a90e820", border: "1px solid #4a90e855" }}><ShieldCheck size={16} color={C.accent} /></span>
           <span className="display text-lg font-extrabold">Aquiles</span>
-          <Link href="/app" className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-[13px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
+          <button onClick={toggleSound} aria-label="toggle ambient sound" title="ambient sound"
+            className="ml-auto mr-1 grid h-8 w-8 place-items-center rounded-lg"
+            style={{ border: `1px solid ${C.ring}`, color: sound ? C.aqua : C.muted }}>
+            {sound ? <Volume2 size={15} /> : <VolumeX size={15} />}
+          </button>
+          <Link href="/app" className="inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-[13px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
             Launch app <ArrowRight size={15} />
           </Link>
         </div>
