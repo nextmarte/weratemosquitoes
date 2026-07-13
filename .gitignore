@@ -1,0 +1,19 @@
+# secrets
+.env
+.env.local
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.cache/
+src/aquiles/cache/
+
+# node / next
+web/node_modules/
+web/.next/
+web/out/
+node_modules/
+
+# os
+.DS_Store

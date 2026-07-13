@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --plane: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #222221;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --baseline: #383835;
+  --ring: rgba(255, 255, 255, 0.10);
+  /* categorical (dark steps) */
+  --blue: #3987e5;
+  --aqua: #199e70;
+  --violet: #9085e9;
+  --orange: #d95926;
+  /* status */
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+}
+
+html, body {
+  background: var(--plane);
+  color: var(--ink);
+  min-height: 100%;
+}
+body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--ring);
+  border-radius: 14px;
+}
+.tabnum { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-geist-mono), ui-monospace, monospace; }
+::selection { background: var(--blue); color: #fff; }
+* { scrollbar-width: thin; scrollbar-color: #34342f transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: #34342f; border-radius: 8px; }

@@ -1,0 +1,20 @@
+{
+  "description": "Curated Aedes-borne flavivirus host-dependency factors from published genome-scale CRISPR screens and the Krogan flavivirus host-pathogen interactome. Each gene is a candidate host-directed antiviral target. Provenance is the study that nominated it; live evidence is pulled at runtime from Open Targets, DGIdb and Europe PMC.",
+  "genes": [
+    {"gene": "STT3A", "virus": ["DENV", "ZIKV"], "role": "Catalytic subunit of the oligosaccharyltransferase (OST) complex; N-glycosylation of viral structural/NS proteins.", "source": "Marceau et al., Nature 2016 — genome-scale CRISPR screen for Flaviviridae host factors", "pmid": "27383987"},
+    {"gene": "STT3B", "virus": ["DENV", "ZIKV"], "role": "OST catalytic paralog; post-translational N-glycosylation required for flavivirus replication.", "source": "Marceau et al., Nature 2016", "pmid": "27383987"},
+    {"gene": "DDOST", "virus": ["DENV", "ZIKV"], "role": "Non-catalytic OST subunit; supports viral glycoprotein maturation.", "source": "Marceau et al., Nature 2016", "pmid": "27383987"},
+    {"gene": "MAGT1", "virus": ["DENV", "ZIKV"], "role": "STT3B-specific OST subunit with oxidoreductase activity; flavivirus dependency factor.", "source": "Marceau et al., Nature 2016", "pmid": "27383987"},
+    {"gene": "OSTC", "virus": ["DENV", "ZIKV"], "role": "STT3A-specific OST subunit; co-translational glycosylation.", "source": "Marceau et al., Nature 2016", "pmid": "27383987"},
+    {"gene": "SPCS1", "virus": ["DENV", "ZIKV", "YFV"], "role": "Signal peptidase complex subunit; cleavage of the flavivirus polyprotein at ER membrane.", "source": "Zhang et al., Cell Reports 2016 — signal peptide processing pathway required by flaviviruses", "pmid": "27545888"},
+    {"gene": "SPCS3", "virus": ["DENV", "ZIKV", "YFV"], "role": "Signal peptidase complex subunit; required for structural protein processing.", "source": "Zhang et al., Cell Reports 2016", "pmid": "27545888"},
+    {"gene": "EMC1", "virus": ["DENV", "ZIKV"], "role": "ER membrane protein complex (EMC) subunit; biogenesis of viral multipass membrane proteins (NS4A/NS4B).", "source": "Barrows et al., Cell Reports 2019; Marceau et al., Nature 2016", "pmid": "30699349"},
+    {"gene": "EMC2", "virus": ["DENV", "ZIKV"], "role": "EMC subunit; flavivirus membrane-protein biogenesis chaperone.", "source": "Savidis et al., Cell Reports 2016", "pmid": "27545876"},
+    {"gene": "EMC3", "virus": ["DENV", "ZIKV"], "role": "EMC insertase core; required for NS4B accumulation.", "source": "Marceau et al., Nature 2016", "pmid": "27383987"},
+    {"gene": "VCP", "virus": ["DENV", "ZIKV"], "role": "AAA+ ATPase (p97); ERAD and membrane extraction co-opted for flavivirus replication. Chemically tractable.", "source": "Phongphaew et al., Virus Research 2017", "pmid": "28711634"},
+    {"gene": "HSPA5", "virus": ["DENV", "ZIKV"], "role": "ER chaperone (GRP78/BiP); folding of viral glycoproteins and UPR modulation.", "source": "Royle et al., 2020; multiple flavivirus proteomics", "pmid": "32210022"},
+    {"gene": "SEC61B", "virus": ["DENV", "ZIKV"], "role": "Sec61 translocon subunit; co-translational insertion of viral proteins; Krogan interactome hit.", "source": "Shah et al., Cell 2018 — comparative flavivirus-host protein interaction map (Krogan lab)", "pmid": "30550790"},
+    {"gene": "RACK1", "virus": ["DENV", "ZIKV"], "role": "Ribosomal scaffold protein; cap-independent translation support; flavivirus interactome hit.", "source": "Shah et al., Cell 2018 (Krogan lab)", "pmid": "30550790"},
+    {"gene": "AXL", "virus": ["ZIKV"], "role": "TAM receptor tyrosine kinase; proposed ZIKV entry cofactor (cell-type dependent; role contested). Kinase-tractable.", "source": "Meertens et al., Cell Reports 2017; Nowakowski et al., Cell Stem Cell 2016", "pmid": "28249587"}
+  ]
+}

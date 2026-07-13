@@ -1,0 +1,2740 @@
+{
+  "generated_seconds": 84.5,
+  "n_targets": 15,
+  "verifier": {
+    "claims_proposed": 79,
+    "claims_caught": 52,
+    "corrected": 4,
+    "unsupported": 48,
+    "caught_pct": 65.8
+  },
+  "dossiers": [
+    {
+      "gene": "AXL",
+      "source": "Meertens et al., Cell Reports 2017; Nowakowski et al., Cell Stem Cell 2016",
+      "host_factor_role": "TAM receptor tyrosine kinase; proposed ZIKV entry cofactor (cell-type dependent; role contested). Kinase-tractable.",
+      "summary": "AXL \u2014 TAM receptor tyrosine kinase; proposed ZIKV entry cofactor (cell-type dependent; role contested). Kinase-tractable. Druggability 0.55 (ligandable / small-molecule precedence); 3 of 3 specialist claims verified against database records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting AXL could remove a host function the pathogen co-opts (TAM receptor tyrosine kinase; proposed ZIKV entry cofactor (cell-type dependent; role contested). Kinase-tractable), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.55, evidence strength 0.75, 3/3 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of AXL (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.55,
+      "evidence_strength": 0.75,
+      "confidence": 0.88,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "ligandable / small-molecule precedence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "AXL is a TAM receptor tyrosine kinase proposed as a ZIKV entry cofactor with cell-type-dependent and contested roles.",
+          "asserted_value": "TAM receptor tyrosine kinase; ZIKV entry cofactor",
+          "basis": "Curated host-factor role field",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42125402",
+              "url": "https://europepmc.org/article/MED/42125402",
+              "snippet": "Emerging and re-emerging vector-borne and other zoonotic RNA viruses: pathogenesis, climate-driven dynamics, and strateg"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42188853",
+              "url": "https://europepmc.org/article/MED/42188853",
+              "snippet": "Ten Years of Congenital Zika Syndrome: From Outbreak to a Decade of Clinical, Therapeutic, and Preventive Advances in a "
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "AXL is kinase-tractable and therefore suitable for pharmacological inhibition as a therapeutic strategy.",
+          "asserted_value": "kinase-tractable",
+          "basis": "Curated host-factor role field",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb record lists numerous AXL-targeting small-molecule kinase inhibitors (e.g., BEMCENTINIB, DUBERMATINIB, GILTERITINIB, BPI-9016, LIGRITINIB) with 'inhibitor' interaction types, supporting AXL's kinase tractability for pharmacological inhibition.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "Bemcentinib is a well-characterized AXL inhibitor with support from multiple authoritative sources.",
+          "asserted_value": "BEMCENTINIB",
+          "basis": "DGIdb drug-gene interactions highest-scoring entry (score 1.56) with multiple sources: GuideToPharmacology, TTD, ChEMBL",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb record lists BEMCENTINIB as the top interaction with score 1.556823220390668, type 'inhibitor', and sources GuideToPharmacology, TTD, and ChEMBL, matching the claim exactly.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "At least 10 documented AXL-targeting compounds exist including ligritinib and gilteritinib fumarate.",
+          "asserted_value": "10+ inhibitors documented",
+          "basis": "DGIdb interaction_count: 51 total interactions; top 10 shown include ligritinib and gilteritinib fumarate",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb record lists interaction_count of 51 and shows at least 19 distinct drugs including LIGRITINIB and GILTERITINIB FUMARATE, supporting at least 10 documented AXL-targeting compounds.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "Recent literature explicitly examines AXL and TAM receptors as mediators of viral cell entry and replication.",
+          "asserted_value": "TAM receptors as virus entry mediators",
+          "basis": "Europe PMC PMID 42101422 (2026): TAM receptor tyrosine kinases as potential mediators of viral spread; PMID 41716461: Zika virus and host protein interactions",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42125402",
+              "url": "https://europepmc.org/article/MED/42125402",
+              "snippet": "Emerging and re-emerging vector-borne and other zoonotic RNA viruses: pathogenesis, climate-driven dynamics, and strateg"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42188853",
+              "url": "https://europepmc.org/article/MED/42188853",
+              "snippet": "Ten Years of Congenital Zika Syndrome: From Outbreak to a Decade of Clinical, Therapeutic, and Preventive Advances in a "
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "GAS6-dependent cell entry via AXL enhances ZIKV infectivity in African strains.",
+          "asserted_value": "GAS6-dependent AXL entry for ZIKV",
+          "basis": "Europe PMC PMID 42263867 (2026): Envelope protein E152 confers enhanced GAS6-dependent cell entry to African Zika virus via AXL",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42125402",
+              "url": "https://europepmc.org/article/MED/42125402",
+              "snippet": "Emerging and re-emerging vector-borne and other zoonotic RNA viruses: pathogenesis, climate-driven dynamics, and strateg"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42188853",
+              "url": "https://europepmc.org/article/MED/42188853",
+              "snippet": "Ten Years of Congenital Zika Syndrome: From Outbreak to a Decade of Clinical, Therapeutic, and Preventive Advances in a "
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "AXL expression patterns vary across cell types, consistent with its cell-type-dependent role in ZIKV entry.",
+          "asserted_value": "cell-type-dependent expression",
+          "basis": "Curated host-factor role statement of cell-type dependence; prior knowledge of TAM receptor distribution",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42125402",
+              "url": "https://europepmc.org/article/MED/42125402",
+              "snippet": "Emerging and re-emerging vector-borne and other zoonotic RNA viruses: pathogenesis, climate-driven dynamics, and strateg"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42188853",
+              "url": "https://europepmc.org/article/MED/42188853",
+              "snippet": "Ten Years of Congenital Zika Syndrome: From Outbreak to a Decade of Clinical, Therapeutic, and Preventive Advances in a "
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 3,
+        "confirmed": 3,
+        "corrected": 0,
+        "unsupported": 0,
+        "unassessed": 4
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Meertens et al., Cell Reports 2017; Nowakowski et al., Cell Stem Cell 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42125402",
+          "url": "https://europepmc.org/article/MED/42125402",
+          "snippet": "Emerging and re-emerging vector-borne and other zoonotic RNA viruses: pathogenesis, climate-driven dynamics, and strateg"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42188853",
+          "url": "https://europepmc.org/article/MED/42188853",
+          "snippet": "Ten Years of Congenital Zika Syndrome: From Outbreak to a Decade of Clinical, Therapeutic, and Preventive Advances in a "
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42263867",
+          "url": "https://europepmc.org/article/MED/42263867",
+          "snippet": "Envelope protein residue E152 confers enhanced GAS6-dependent cell entry to the African Zika virus strain MR766."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "HSPA5",
+      "source": "Royle et al., 2020; multiple flavivirus proteomics",
+      "host_factor_role": "ER chaperone (GRP78/BiP); folding of viral glycoproteins and UPR modulation.",
+      "summary": "HSPA5 \u2014 ER chaperone (GRP78/BiP); folding of viral glycoproteins and UPR modulation. Druggability 0.55 (ligandable / small-molecule precedence); 4 of 7 specialist claims verified against database records. The independent verifier caught 5 of 7 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting HSPA5 could remove a host function the pathogen co-opts (ER chaperone (GRP78/BiP); folding of viral glycoproteins and UPR modulation), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.55, evidence strength 0.83, 4/7 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of HSPA5 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.55,
+      "evidence_strength": 0.83,
+      "confidence": 0.52,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "ligandable / small-molecule precedence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "HSPA5 (GRP78/BiP) functions as an ER chaperone facilitating proper folding of viral glycoproteins and modulating the unfolded protein response during viral infection.",
+          "asserted_value": "ER chaperone; viral glycoprotein folding; UPR modulation",
+          "basis": "Curated host-factor role description and Europe PMC literature (PMID 42198696 on flavivirus-induced ER stress and UPR)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles/metadata (including PMID 42198696's title on flavivirus-induced ER stress and UPR generally) without any actual abstract or content confirming HSPA5's specific role as an ER chaperone facilitating viral glycoprotein folding or modulating UPR.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42060664",
+              "url": "https://europepmc.org/article/MED/42060664",
+              "snippet": "Comparative Gene Co-expression Network Analysis of Proviral and Antiviral Responses to Dengue Virus-2 (DENV-2) and Zika "
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "HSPA5 mediates antiviral autophagy responses, as demonstrated by HSPA5-induced autophagy targeting VP2 through PERK-eIF2\u03b1 signaling to inhibit Seneca Valley virus replication.",
+          "asserted_value": "SVA replication inhibition via autophagy",
+          "basis": "Europe PMC literature (PMID 41973539)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42060664",
+              "url": "https://europepmc.org/article/MED/42060664",
+              "snippet": "Comparative Gene Co-expression Network Analysis of Proviral and Antiviral Responses to Dengue Virus-2 (DENV-2) and Zika "
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "HSPA5 is implicated in dengue and Zika virus infection pathways, with evidence of altered expression in co-expression networks during flavivirus infection in neural progenitor cells.",
+          "asserted_value": "DENV-2 and ZIKV infection response",
+          "basis": "Europe PMC literature (PMID 42060664, PMID 42198696, PMID 41716461)",
+          "verdict": "corrected",
+          "corrected_value": "DENV-2 and ZIKV co-expression network analysis in human neural progenitor cells (paper titles only; PMID 42198696 and 41716461 concern flavivirus ER stress/UPR and ZIKV-host protein interactions generally, not specifically HSPA5 co-expression evidence)",
+          "rationale": "The record only lists paper titles (PMID 42060664 on DENV-2/ZIKV co-expression networks in hNPCs, 42198696 on flavivirus ER stress/UPR, 41716461 on ZIKV-host protein interactions) without any mention of HSPA5 or its expression, so the specific HSPA5-DENV/ZIKV link asserted is not directly supported by the titles beyond topical relevance.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42060664",
+              "url": "https://europepmc.org/article/MED/42060664",
+              "snippet": "Comparative Gene Co-expression Network Analysis of Proviral and Antiviral Responses to Dengue Virus-2 (DENV-2) and Zika "
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "HSPA5 has moderate ligand-binding tractability with 17 known drug-gene interactions recorded in DGIdb, suggesting chemical accessibility.",
+          "asserted_value": "17 interactions; moderate druggability",
+          "basis": "DGIdb interaction_count field",
+          "verdict": "corrected",
+          "corrected_value": "17 interactions; druggability characterization ('moderate ligand-binding tractability') not supported by record",
+          "rationale": "The DGIdb interaction_count is indeed 17, confirming that part, but the record contains no tractability_positive_buckets or Open Targets data (available: false) to support any 'moderate ligand-binding tractability' assessment.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "IT-139 is a documented inhibitor of HSPA5 with a DGIdb interaction score of 3.11, indicating strong predicted interaction.",
+          "asserted_value": "IT-139",
+          "basis": "DGIdb interactions list (score 3.113646440781337)",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb interactions list includes an entry with drug 'IT-139', concept_id 'drugbank:DB17145', score 3.113646440781337, sourced from TTD, matching the claimed drug and score.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "Thapsigargin is a known HSPA5-interacting compound that induces ER stress by depleting calcium stores, with a DGIdb score of 1.04.",
+          "asserted_value": "Thapsigargin",
+          "basis": "DGIdb interactions list (score 1.037882146927112)",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb interactions list includes an entry for drug 'THAPSIGARGIN' with score 1.037882146927112, matching the claimed value of ~1.04.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "HSPA5 is a ubiquitously expressed ER protein essential for cellular homeostasis, indicating that broad inhibition may pose safety concerns related to proteostasis disruption.",
+          "asserted_value": "Potential proteostasis liability; essential gene",
+          "basis": "prior knowledge of HSPA5 biological role and mechanism",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record's Open Targets safety_liabilities field is null and DGIdb contains only drug-interaction data, providing no evidence about HSPA5 expression breadth, essentiality, or proteostasis role.",
+          "citations": []
+        },
+        {
+          "field": "expression",
+          "statement": "HSPA5 expression is significantly upregulated during viral infections including dengue, Zika, and other flaviviruses as part of the innate immune response.",
+          "asserted_value": "Upregulated in flavivirus and enterovirus infection",
+          "basis": "Europe PMC literature (PMID 42198696, PMID 42060664, PMID 41973539)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles/PMIDs (e.g., titles about DENV-2/ZIKV network analysis, flavivirus ER stress/UPR, and HSPA5-mediated autophagy against SVA) without any abstract or data indicating HSPA5 expression is upregulated in dengue, Zika, or enterovirus infection.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42060664",
+              "url": "https://europepmc.org/article/MED/42060664",
+              "snippet": "Comparative Gene Co-expression Network Analysis of Proviral and Antiviral Responses to Dengue Virus-2 (DENV-2) and Zika "
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 7,
+        "confirmed": 2,
+        "corrected": 2,
+        "unsupported": 3,
+        "unassessed": 1
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Royle et al., 2020; multiple flavivirus proteomics",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42060664",
+          "url": "https://europepmc.org/article/MED/42060664",
+          "snippet": "Comparative Gene Co-expression Network Analysis of Proviral and Antiviral Responses to Dengue Virus-2 (DENV-2) and Zika "
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42198696",
+          "url": "https://europepmc.org/article/MED/42198696",
+          "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41716461",
+          "url": "https://europepmc.org/article/MED/41716461",
+          "snippet": "Zika virus and host protein interactions for understanding molecular mechanisms of pathogenesis and therapeutic developm"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "VCP",
+      "source": "Phongphaew et al., Virus Research 2017",
+      "host_factor_role": "AAA+ ATPase (p97); ERAD and membrane extraction co-opted for flavivirus replication. Chemically tractable.",
+      "summary": "VCP \u2014 AAA+ ATPase (p97); ERAD and membrane extraction co-opted for flavivirus replication. Chemically tractable. Druggability 0.55 (ligandable / small-molecule precedence); 2 of 6 specialist claims verified against database records. The independent verifier caught 4 of 6 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting VCP could remove a host function the pathogen co-opts (AAA+ ATPase (p97); ERAD and membrane extraction co-opted for flavivirus replication. Chemically tractable), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.55, evidence strength 0.67, 2/6 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of VCP (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.55,
+      "evidence_strength": 0.67,
+      "confidence": 0.28,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "ligandable / small-molecule precedence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "VCP is an AAA+ ATPase (p97) that mediates ERAD and membrane extraction processes co-opted by flaviviruses for replication.",
+          "asserted_value": "AAA+ ATPase; ERAD and membrane extraction",
+          "basis": "Curated host-factor role field",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only a list of paper titles, years, and PMIDs with no mention of VCP, p97, AAA+ ATPase, ERAD, or membrane extraction functions.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41716461",
+              "url": "https://europepmc.org/article/MED/41716461",
+              "snippet": "Zika virus and host protein interactions for understanding molecular mechanisms of pathogenesis and therapeutic developm"
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "VCP is chemically tractable as a drug target based on its enzymatic properties.",
+          "asserted_value": "Chemically tractable",
+          "basis": "Curated host-factor role field",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record's Open Targets tractability fields are all null/unavailable, and DGIdb only lists drug interactions without any statement about enzymatic properties or chemical tractability, so the record neither confirms nor corrects the claim.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "CB-5083 is a VCP inhibitor with the highest interaction score in DGIdb.",
+          "asserted_value": "CB-5083",
+          "basis": "DGIdb interaction score 35.29",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb interactions list shows CB-5083 with score 35.28799299552182, the highest among the three listed interactions (AMENTOFLAVONE 2.2055, HEXACHLOROPHENE 0.4303).",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "Three compounds have reported interactions with VCP in DGIdb databases.",
+          "asserted_value": "3 compounds",
+          "basis": "DGIdb interaction_count",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb.interaction_count is 3, matching the asserted 3 compounds with reported interactions.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "VCP dysfunction impairs flavivirus replication through disruption of ERAD-dependent membrane extraction required for viral replication.",
+          "asserted_value": "Flavivirus replication inhibition",
+          "basis": "Curated host-factor role and Europe PMC literature on flavivirus ER stress and replication",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41716461",
+              "url": "https://europepmc.org/article/MED/41716461",
+              "snippet": "Zika virus and host protein interactions for understanding molecular mechanisms of pathogenesis and therapeutic developm"
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "Host-driven ubiquitination events involving VCP-mediated processes represent options for broad-spectrum therapeutic intervention against vector-transmitted RNA viruses.",
+          "asserted_value": "Broad-spectrum antiviral potential",
+          "basis": "Europe PMC PMID 39599842 on ubiquitination and viral infections",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41716461",
+              "url": "https://europepmc.org/article/MED/41716461",
+              "snippet": "Zika virus and host protein interactions for understanding molecular mechanisms of pathogenesis and therapeutic developm"
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "VCP is ubiquitously expressed as an essential cellular protein required for protein quality control across multiple cell types and tissues.",
+          "asserted_value": "Ubiquitous expression",
+          "basis": "prior knowledge of VCP as a housekeeping AAA+ ATPase",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only contains a list of Europe PMC paper titles/metadata and includes no data on VCP's tissue or cellular expression pattern.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42198696",
+              "url": "https://europepmc.org/article/MED/42198696",
+              "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41716461",
+              "url": "https://europepmc.org/article/MED/41716461",
+              "snippet": "Zika virus and host protein interactions for understanding molecular mechanisms of pathogenesis and therapeutic developm"
+            }
+          ]
+        },
+        {
+          "field": "safety",
+          "statement": "VCP inhibition may cause cellular toxicity due to ERAD dysfunction and accumulation of misfolded proteins in non-infected cells.",
+          "asserted_value": "Potential on-target toxicity from ERAD disruption",
+          "basis": "prior knowledge of VCP's essential role in protein quality control",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains no safety_liabilities data (null) and no information about ERAD dysfunction or cellular toxicity, only drug interaction entries from DGIdb.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 6,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 4,
+        "unassessed": 2
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Phongphaew et al., Virus Research 2017",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42198696",
+          "url": "https://europepmc.org/article/MED/42198696",
+          "snippet": "Flavivirus-Induced ER Stress and Unfolded Protein Response: A Central Hub Linking Lipid Droplet Remodeling and Viral Rep"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41716461",
+          "url": "https://europepmc.org/article/MED/41716461",
+          "snippet": "Zika virus and host protein interactions for understanding molecular mechanisms of pathogenesis and therapeutic developm"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 39599842",
+          "url": "https://europepmc.org/article/MED/39599842",
+          "snippet": "Host-Driven Ubiquitination Events in Vector-Transmitted RNA Virus Infections as Options for Broad-Spectrum Therapeutic I"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "DDOST",
+      "source": "Marceau et al., Nature 2016",
+      "host_factor_role": "Non-catalytic OST subunit; supports viral glycoprotein maturation.",
+      "summary": "DDOST \u2014 Non-catalytic OST subunit; supports viral glycoprotein maturation. Druggability 0.15 (no tractability evidence); 3 of 4 specialist claims verified against database records. The independent verifier caught 2 of 4 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting DDOST could remove a host function the pathogen co-opts (Non-catalytic OST subunit; supports viral glycoprotein maturation), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.75, 3/4 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of DDOST (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.75,
+      "confidence": 0.66,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "DDOST is a non-catalytic subunit of the oligosaccharyltransferase (OST) complex that supports viral glycoprotein maturation during infection.",
+          "asserted_value": "non-catalytic OST subunit supporting viral glycoprotein maturation",
+          "basis": "Curated host-factor role provided in the target description",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41876639",
+              "url": "https://europepmc.org/article/MED/41876639",
+              "snippet": "Glycosylation as a dynamic regulator of RLR and cGAS-STING innate immune signalling pathways."
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "DDOST lacks direct small-molecule inhibitors in current drug-target interaction databases.",
+          "asserted_value": "no known direct inhibitors",
+          "basis": "DGIdb interaction_count: 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb record shows interaction_count: 0 and an empty interactions list, supporting that there are no known direct inhibitors.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "DDOST has documented roles in dengue and Zika virus infection through its function in STA3-mediated protein complex assembly and glycoprotein maturation.",
+          "asserted_value": "dengue virus, Zika virus",
+          "basis": "Europe PMC PMID 40612902 (STT3A-mediated complex assembly in dengue/Zika) and PMID 31546825 (proteomics of Zika infection)",
+          "verdict": "corrected",
+          "corrected_value": "dengue virus, Zika virus (via STT3A-mediated complex assembly, PMID 40612902); Zika virus (via proteomics, PMID 31546825)",
+          "rationale": "The record confirms PMID 40612902 is titled 'STT3A-mediated mega protein complex assembly during dengue and Zika virus infection' (not 'STA3-mediated' as claimed), and PMID 31546825 is titled 'Chasing Intracellular Zika Virus Using Proteomics' which does not mention dengue or DDOST specifically.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41876639",
+              "url": "https://europepmc.org/article/MED/41876639",
+              "snippet": "Glycosylation as a dynamic regulator of RLR and cGAS-STING innate immune signalling pathways."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "DDOST-mediated glycosylation is implicated in regulating innate immune signalling pathways critical for controlling viral infections.",
+          "asserted_value": "RLR and cGAS-STING signalling regulation",
+          "basis": "Europe PMC PMID 41876639 (Glycosylation as dynamic regulator of innate immune signalling)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41876639",
+              "url": "https://europepmc.org/article/MED/41876639",
+              "snippet": "Glycosylation as a dynamic regulator of RLR and cGAS-STING innate immune signalling pathways."
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "DDOST is part of the endoplasmic reticulum-resident oligosaccharyltransferase complex, localized where viral glycoproteins undergo co-translational modification.",
+          "asserted_value": "endoplasmic reticulum",
+          "basis": "prior knowledge of DDOST cellular localization and function",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41876639",
+              "url": "https://europepmc.org/article/MED/41876639",
+              "snippet": "Glycosylation as a dynamic regulator of RLR and cGAS-STING innate immune signalling pathways."
+            }
+          ]
+        },
+        {
+          "field": "safety",
+          "statement": "DDOST is an essential component of the core OST complex required for N-glycosylation of numerous host proteins, suggesting broad potential for off-target effects.",
+          "asserted_value": "essential host protein",
+          "basis": "prior knowledge of DDOST role in basal protein glycosylation pathway",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null/unavailable and DGIdb with zero interactions, so no data in the record supports or corrects the claim about DDOST's essential role in N-glycosylation.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No approved or investigational drugs specifically targeting DDOST have been identified in the DGIdb database.",
+          "asserted_value": "none",
+          "basis": "DGIdb interactions: []",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb record shows interaction_count: 0 and interactions: [], directly supporting that no drugs targeting DDOST were identified in DGIdb.",
+          "citations": []
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "DDOST functions as a component of flavivirus replication machinery, with documented interactions during dengue and Zika virus nonstructural protein-mediated replication processes.",
+          "asserted_value": "flavivirus replication cofactor",
+          "basis": "Europe PMC PMID 40005559 (Orthoflavivirus non-structural proteins and host interactions)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41876639",
+              "url": "https://europepmc.org/article/MED/41876639",
+              "snippet": "Glycosylation as a dynamic regulator of RLR and cGAS-STING innate immune signalling pathways."
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 4,
+        "confirmed": 2,
+        "corrected": 1,
+        "unsupported": 1,
+        "unassessed": 4
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Marceau et al., Nature 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40612902",
+          "url": "https://europepmc.org/article/MED/40612902",
+          "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41876639",
+          "url": "https://europepmc.org/article/MED/41876639",
+          "snippet": "Glycosylation as a dynamic regulator of RLR and cGAS-STING innate immune signalling pathways."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40005559",
+          "url": "https://europepmc.org/article/MED/40005559",
+          "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "SPCS3",
+      "source": "Zhang et al., Cell Reports 2016",
+      "host_factor_role": "Signal peptidase complex subunit; required for structural protein processing.",
+      "summary": "SPCS3 \u2014 Signal peptidase complex subunit; required for structural protein processing. Druggability 0.15 (no tractability evidence); 2 of 4 specialist claims verified against database records. The independent verifier caught 2 of 4 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting SPCS3 could remove a host function the pathogen co-opts (Signal peptidase complex subunit; required for structural protein processing), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/4 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of SPCS3 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.42,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "SPCS3 is a subunit of the signal peptidase complex required for processing structural proteins in the endoplasmic reticulum.",
+          "asserted_value": "Signal peptidase complex subunit; structural protein processing",
+          "basis": "Curated host-factor role field",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only paper titles/metadata mentioning SPCS2, SPP, and general signal peptidase complex studies, but no title or field explicitly references 'SPCS3' or its role in structural protein processing.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41657861",
+              "url": "https://europepmc.org/article/MED/41657861",
+              "snippet": "A brief review of chikungunya fever: From molecular virology to countermeasures."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "Signal peptidase complex components are required for rotavirus VP7 structural protein processing and virion assembly.",
+          "asserted_value": "Required for rotavirus VP7 processing and virion assembly",
+          "basis": "Europe PMC PMID 41860932: Signal peptidase complex mediates rotavirus VP7 processing and virion assembly",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41657861",
+              "url": "https://europepmc.org/article/MED/41657861",
+              "snippet": "A brief review of chikungunya fever: From molecular virology to countermeasures."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "Related signal peptidase family member SPP has been identified as a druggable antiviral host target for multiple flaviviruses in functional genomics screens.",
+          "asserted_value": "SPP identified as antiviral target for flaviviruses",
+          "basis": "Europe PMC PMID 39969998: Druggable genome screens identify SPP as an antiviral host target for multiple flaviviruses",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The record lists a paper with PMID 39969998 titled 'Druggable genome screens identify SPP as an antiviral host target for multiple flaviviruses,' matching the claim exactly.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41657861",
+              "url": "https://europepmc.org/article/MED/41657861",
+              "snippet": "A brief review of chikungunya fever: From molecular virology to countermeasures."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "SPCS2, a closely related signal peptidase complex subunit, is a critical host factor for JEV replication through regulation of viral protein stability and virion assembly.",
+          "asserted_value": "SPCS2 required for JEV replication; protein stability regulation",
+          "basis": "Europe PMC PMID 41910145: SPCS2 serves as a critical host factor for JEV replication",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41657861",
+              "url": "https://europepmc.org/article/MED/41657861",
+              "snippet": "A brief review of chikungunya fever: From molecular virology to countermeasures."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "Signal peptidase complex components are constitutively expressed in the endoplasmic reticulum, a crucial cellular hub for flavivirus infection.",
+          "asserted_value": "ER-localized; constitutively expressed",
+          "basis": "Europe PMC PMID 40295816: The endoplasmic reticulum (ER) is a crucial cellular hub in flavivirus infection",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41657861",
+              "url": "https://europepmc.org/article/MED/41657861",
+              "snippet": "A brief review of chikungunya fever: From molecular virology to countermeasures."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "Signal peptidase complex members represent potential antiviral intervention points based on meta-analysis of functional genomics studies of pandemic-concern viruses.",
+          "asserted_value": "Potential antiviral target; ER-localized enzyme",
+          "basis": "Europe PMC PMID 42327991: Meta-analysis reveals conserved cellular pathways required by viruses of pandemic concern",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No direct SPCS3 inhibitors are reported in DGIdb, though related SPP inhibitors may have antiviral potential.",
+          "asserted_value": "Zero direct interactions in DGIdb",
+          "basis": "DGIdb interaction_count: 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb field shows interaction_count: 0 and an empty interactions list for SPCS3, matching the asserted zero direct interactions.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "SPCS3 is essential for endoplasmic reticulum protein processing, suggesting potential safety concerns if completely inhibited without isoform selectivity or temporal control.",
+          "asserted_value": "Essential protein; ER housekeeping function",
+          "basis": "Curated host-factor role field and prior knowledge of signal peptidase essentiality",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only null/empty Open Targets and DGIdb fields with no safety_liabilities data or any information about SPCS3's essentiality or ER function, so the claim cannot be verified from this record.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 4,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 2,
+        "unassessed": 4
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Zhang et al., Cell Reports 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41657861",
+          "url": "https://europepmc.org/article/MED/41657861",
+          "snippet": "A brief review of chikungunya fever: From molecular virology to countermeasures."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41860932",
+          "url": "https://europepmc.org/article/MED/41860932",
+          "snippet": "Signal peptidase complex mediates rotavirus VP7 processing and virion assembly."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "EMC1",
+      "source": "Barrows et al., Cell Reports 2019; Marceau et al., Nature 2016",
+      "host_factor_role": "ER membrane protein complex (EMC) subunit; biogenesis of viral multipass membrane proteins (NS4A/NS4B).",
+      "summary": "EMC1 \u2014 ER membrane protein complex (EMC) subunit; biogenesis of viral multipass membrane proteins (NS4A/NS4B). Druggability 0.15 (no tractability evidence); 2 of 4 specialist claims verified against database records. The independent verifier caught 2 of 4 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting EMC1 could remove a host function the pathogen co-opts (ER membrane protein complex (EMC) subunit; biogenesis of viral multipass membrane proteins (NS4A/NS4B)), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/4 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of EMC1 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.42,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "EMC1 is a subunit of the ER membrane protein complex involved in biogenesis of viral multipass membrane proteins including NS4A and NS4B.",
+          "asserted_value": "ER membrane protein complex subunit; NS4A/NS4B biogenesis",
+          "basis": "Curated host-factor role",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "EMC1 participates in ER-specific protein synthesis remodeling induced by flaviviruses during replication.",
+          "asserted_value": "ER protein synthesis regulation during flavivirus replication",
+          "basis": "Europe PMC PMID 39621795: 'Flaviviruses induce ER-specific remodelling of protein synthesis'",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "EMC1 tractability as a drug target has not been assessed in Open Targets due to data unavailability.",
+          "asserted_value": "Unknown",
+          "basis": "Open Targets API error; no druggability classification available",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The Open Targets field shows 'available': false with null tractability_positive_buckets, url, and other fields, indicating no druggability data was retrievable.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No direct inhibitors or modulators of EMC1 are documented in DGIdb.",
+          "asserted_value": "0 drugs",
+          "basis": "DGIdb interaction_count: 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb record shows interaction_count: 0 and an empty interactions list, supporting the claim of no documented drug interactions for EMC1.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "EMC1 is functionally required for replication of flaviviruses including dengue, Zika, and Japanese encephalitis virus through its role in NS4A/NS4B membrane protein biogenesis.",
+          "asserted_value": "Dengue, Zika, JEV",
+          "basis": "Curated host-factor role and Europe PMC citations on orthoflavivirus NS proteins (PMID 40005559) and JEV host factors (PMID 41910145)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "EMC1 is constitutively expressed as an ER membrane resident protein required for normal cellular protein synthesis.",
+          "asserted_value": "ER-resident; constitutive expression",
+          "basis": "prior knowledge of EMC complex biology and PMID 39621795",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles, years, PMIDs, and citation counts with no description of EMC1 expression pattern or ER-residency details, so it neither confirms nor corrects the claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        },
+        {
+          "field": "safety",
+          "statement": "EMC1 disruption may impair ER protein synthesis homeostasis and biogenesis of essential cellular multipass membrane proteins, raising potential safety concerns for broad inhibition.",
+          "asserted_value": "ER protein synthesis dependency; potential loss-of-function liability",
+          "basis": "prior knowledge of EMC function in essential cellular processes combined with PMID 39621795",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and no other safety data, so it provides no evidence for the claimed ER protein synthesis dependency or loss-of-function liability.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 4,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 2,
+        "unassessed": 3
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Barrows et al., Cell Reports 2019; Marceau et al., Nature 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41910145",
+          "url": "https://europepmc.org/article/MED/41910145",
+          "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40005559",
+          "url": "https://europepmc.org/article/MED/40005559",
+          "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "EMC3",
+      "source": "Marceau et al., Nature 2016",
+      "host_factor_role": "EMC insertase core; required for NS4B accumulation.",
+      "summary": "EMC3 \u2014 EMC insertase core; required for NS4B accumulation. Druggability 0.15 (no tractability evidence); 2 of 4 specialist claims verified against database records. The independent verifier caught 3 of 4 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting EMC3 could remove a host function the pathogen co-opts (EMC insertase core; required for NS4B accumulation), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/4 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of EMC3 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.42,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "EMC3 functions as an insertase core component required for accumulation of viral NS4B protein during flavivirus replication.",
+          "asserted_value": "NS4B accumulation requirement",
+          "basis": "Curated host-factor role provided in input",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "EMC3 has not been evaluated for druggability in standard screening panels, with no known chemical modulators identified to date.",
+          "asserted_value": "Unknown/Uncharacterized",
+          "basis": "prior knowledge; lack of DGIdb interactions (interaction_count: 0)",
+          "verdict": "corrected",
+          "corrected_value": "No known chemical modulators identified in DGIdb (0 interactions); Open Targets tractability data unavailable, so overall druggability assessment cannot be fully confirmed as 'not evaluated' but is 'unsupported/no data available'.",
+          "rationale": "DGIdb shows interaction_count 0 with no interactions, and Open Targets tractability_positive_buckets and known_drug_count are null with available:false, supporting lack of known modulators/data rather than a definitive claim it was never evaluated in screening panels.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No known drugs or small-molecule inhibitors have been reported to target EMC3.",
+          "asserted_value": "None identified",
+          "basis": "DGIdb interactions field (empty list)",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb record shows interaction_count: 0 and an empty interactions list, supporting that no known drugs/inhibitors are reported for EMC3.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "EMC3 is part of the endoplasmic reticulum membrane protein complex; direct inhibition may disrupt essential ER protein insertion pathways.",
+          "asserted_value": "Potential on-target toxicity risk",
+          "basis": "prior knowledge of EMC function in protein translocation",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and available false, and DGIdb has zero interactions, so no data in the record supports or corrects the claimed on-target toxicity risk.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "EMC3 is implicated as a required host factor for flavivirus replication, supporting its candidacy for antiviral intervention.",
+          "asserted_value": "Flavivirus replication dependence",
+          "basis": "Curated host-factor role; context consistent with Europe PMC literature on Orthoflavivirus host interactions (PMID 40005559)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "EMC3 is constitutively expressed as a core component of the endoplasmic reticulum membrane protein insertion machinery.",
+          "asserted_value": "Ubiquitous/Constitutive ER expression",
+          "basis": "prior knowledge of EMC complex biology",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only a list of paper titles/metadata from Europe PMC with no information on EMC3 expression patterns or ER membrane insertion machinery.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910145",
+              "url": "https://europepmc.org/article/MED/41910145",
+              "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 4,
+        "confirmed": 1,
+        "corrected": 1,
+        "unsupported": 2,
+        "unassessed": 2
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Marceau et al., Nature 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41910145",
+          "url": "https://europepmc.org/article/MED/41910145",
+          "snippet": "SPCS2 serves as a critical host factor for JEV replication by regulating viral protein stability and virion assembly."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40062839",
+          "url": "https://europepmc.org/article/MED/40062839",
+          "snippet": "A single mutation in the PrM gene of Zika virus determines AXL dependency for infection of human neural cells."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "EMC2",
+      "source": "Savidis et al., Cell Reports 2016",
+      "host_factor_role": "EMC subunit; flavivirus membrane-protein biogenesis chaperone.",
+      "summary": "EMC2 \u2014 EMC subunit; flavivirus membrane-protein biogenesis chaperone. Druggability 0.15 (no tractability evidence); 2 of 5 specialist claims verified against database records. The independent verifier caught 3 of 5 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting EMC2 could remove a host function the pathogen co-opts (EMC subunit; flavivirus membrane-protein biogenesis chaperone), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "watch",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/5 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of EMC2 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.33,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "EMC2 is a subunit of the ER membrane protein complex (EMC) that functions as a chaperone for flavivirus membrane protein biogenesis.",
+          "asserted_value": "EMC subunit; flavivirus membrane-protein biogenesis chaperone",
+          "basis": "Curated host-factor role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only paper titles/metadata about flavivirus host factors and CRISPR screens, with no content describing EMC2's specific molecular function as an EMC subunit or chaperone role.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40005559",
+              "url": "https://europepmc.org/article/MED/40005559",
+              "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "EMC2 is identified as a host factor required for flavivirus replication, demonstrated through functional genomics and CRISPR screening studies.",
+          "asserted_value": "Required for flavivirus replication",
+          "basis": "Europe PMC literature: PMID 37891676 (CRISPR-Cas system to discover host-virus interactions in Flaviviridae), PMID 39422472 (virus host factor discovery using CRISPR screening)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40005559",
+              "url": "https://europepmc.org/article/MED/40005559",
+              "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "EMC dependency has been characterized in dengue and Zika virus NS4B protein topology and function, supporting EMC2's role in orthoflavivirus replication.",
+          "asserted_value": "Dengue and Zika virus dependency documented",
+          "basis": "Europe PMC literature: PMID 39745435 (Dengue and Zika virus NS4B proteins differ in EMC dependency)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40005559",
+              "url": "https://europepmc.org/article/MED/40005559",
+              "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "EMC2 function in flavivirus infections is reviewed in recent functional genomics meta-analyses of pandemic-concern viruses.",
+          "asserted_value": "Included in conserved pathways for pandemic viruses",
+          "basis": "Europe PMC literature: PMID 42327991 (Meta-analysis of functional genomics studies reveals conserved cellular pathways)",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40005559",
+              "url": "https://europepmc.org/article/MED/40005559",
+              "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+            }
+          ]
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No known drugs directly targeting EMC2 are documented in the DGIdb database.",
+          "asserted_value": "0 reported interactions",
+          "basis": "DGIdb drug-gene interactions: interaction_count 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb field shows interaction_count: 0 and an empty interactions list, directly supporting the claim of 0 reported drug-gene interactions for EMC2.",
+          "citations": []
+        },
+        {
+          "field": "druggability",
+          "statement": "EMC2 tractability status cannot be assessed from available Open Targets data due to API access failure.",
+          "asserted_value": "Unknown",
+          "basis": "Open Targets data unavailable; prior knowledge that EMC complex components are generally considered challenging protein-complex targets",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The record shows Open Targets 'available': false with all tractability fields null, confirming that tractability status cannot be assessed due to unavailable Open Targets data.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "EMC2 is part of a constitutive ER membrane protein complex essential for general protein biogenesis, suggesting potential safety concerns for systemic inhibition.",
+          "asserted_value": "Potential on-target toxicity from disrupting essential ER function",
+          "basis": "prior knowledge of EMC complex role in core cellular protein translocation",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and unavailable, and DGIdb has no interaction data, so neither source supports or corrects the claim about EMC2's role in ER membrane protein complex or associated toxicity concerns.",
+          "citations": []
+        },
+        {
+          "field": "expression",
+          "statement": "EMC2 is broadly expressed as a component of the ubiquitous ER membrane protein complex required for baseline cellular function.",
+          "asserted_value": "Broad/ubiquitous expression",
+          "basis": "prior knowledge of EMC complex as essential cellular machinery",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only paper titles/metadata about EMC-related virus studies and does not report any expression data for EMC2 across tissues or cell types.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40005559",
+              "url": "https://europepmc.org/article/MED/40005559",
+              "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 5,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 3,
+        "unassessed": 3
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Savidis et al., Cell Reports 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40005559",
+          "url": "https://europepmc.org/article/MED/40005559",
+          "snippet": "Functional Roles and Host Interactions of &lt;i&gt;Orthoflavivirus&lt;/i&gt; Non-Structural Proteins During Replication."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 37891676",
+          "url": "https://europepmc.org/article/MED/37891676",
+          "snippet": "CRISPR-Cas system to discover host-virus interactions in Flaviviridae."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "STT3A",
+      "source": "Marceau et al., Nature 2016 \u2014 genome-scale CRISPR screen for Flaviviridae host factors",
+      "host_factor_role": "Catalytic subunit of the oligosaccharyltransferase (OST) complex; N-glycosylation of viral structural/NS proteins.",
+      "summary": "STT3A \u2014 Catalytic subunit of the oligosaccharyltransferase (OST) complex; N-glycosylation of viral structural/NS proteins. Druggability 0.15 (no tractability evidence); 2 of 6 specialist claims verified against database records. The independent verifier caught 4 of 6 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting STT3A could remove a host function the pathogen co-opts (Catalytic subunit of the oligosaccharyltransferase (OST) complex; N-glycosylation of viral structural/NS proteins), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/6 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of STT3A (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.28,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "STT3A is the catalytic subunit of the oligosaccharyltransferase complex that mediates N-glycosylation of viral structural and non-structural proteins.",
+          "asserted_value": "catalytic subunit of OST complex",
+          "basis": "curated host-factor role description",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "STT3A participates in mega protein complex assembly during dengue and Zika virus infection.",
+          "asserted_value": "dengue and Zika virus",
+          "basis": "PMID 40612902",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The paper titled 'STT3A-mediated mega protein complex assembly during dengue and Zika virus infection.' with PMID 40612902 directly supports the claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "STT3A is involved in the shared host genetic landscape of respiratory viral infection.",
+          "asserted_value": "respiratory viral infection",
+          "basis": "PMID 40372436",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The record only lists a paper titled 'Shared host genetic landscape of respiratory viral infection.' with PMID 40372436, but provides no abstract or content confirming STT3A's specific involvement in that study.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No known drugs targeting STT3A are currently documented in DGIdb.",
+          "asserted_value": "0 drugs",
+          "basis": "DGIdb interaction_count field",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb record shows interaction_count of 0 and an empty interactions list, supporting that no known drugs targeting STT3A are documented.",
+          "citations": []
+        },
+        {
+          "field": "druggability",
+          "statement": "STT3A is an enzymatic protein (catalytic subunit) with a defined biochemical function, suggesting potential for small-molecule or peptide inhibition.",
+          "asserted_value": "enzyme with catalytic function",
+          "basis": "prior knowledge of OST complex biology and curated role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains no data on STT3A's biochemical function or enzymatic activity\u2014Open Targets is unavailable (null/false) and DGIdb shows zero interactions, so nothing in the record supports or contradicts the enzymatic/catalytic claim.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "STT3A is identified as a therapeutic target for viral N-glycosylation modification across multiple flaviviruses.",
+          "asserted_value": "flavivirus target",
+          "basis": "PMID 41131269 and PMID 40005559",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "STT3A has been identified through CRISPR-Cas screening as a host-virus interaction factor relevant to Flaviviridae.",
+          "asserted_value": "CRISPR-validated host factor",
+          "basis": "PMID 37891676",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The record only lists the paper title, year, PMID, and citation count for PMID 37891676 ('CRISPR-Cas system to discover host-virus interactions in Flaviviridae') without any content confirming STT3A specifically was identified as a host factor in that screen.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "STT3A is expressed in cells susceptible to dengue, Zika, and respiratory viral infections as evidenced by its functional role in these infection contexts.",
+          "asserted_value": "ubiquitously expressed in infected tissues",
+          "basis": "prior knowledge and functional evidence from PMID 40612902, PMID 40372436",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only paper titles, years, PMIDs, and citation counts with no expression data field indicating tissue-level expression of STT3A.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 6,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 4,
+        "unassessed": 2
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Marceau et al., Nature 2016 \u2014 genome-scale CRISPR screen for Flaviviridae host factors",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41131269",
+          "url": "https://europepmc.org/article/MED/41131269",
+          "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40612902",
+          "url": "https://europepmc.org/article/MED/40612902",
+          "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40372436",
+          "url": "https://europepmc.org/article/MED/40372436",
+          "snippet": "Shared host genetic landscape of respiratory viral infection."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "SPCS1",
+      "source": "Zhang et al., Cell Reports 2016 \u2014 signal peptide processing pathway required by flaviviruses",
+      "host_factor_role": "Signal peptidase complex subunit; cleavage of the flavivirus polyprotein at ER membrane.",
+      "summary": "SPCS1 \u2014 Signal peptidase complex subunit; cleavage of the flavivirus polyprotein at ER membrane. Druggability 0.15 (no tractability evidence); 2 of 6 specialist claims verified against database records. The independent verifier caught 4 of 6 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting SPCS1 could remove a host function the pathogen co-opts (Signal peptidase complex subunit; cleavage of the flavivirus polyprotein at ER membrane), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/6 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of SPCS1 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.28,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "SPCS1 is a signal peptidase complex subunit that cleaves the flavivirus polyprotein at the endoplasmic reticulum membrane.",
+          "asserted_value": "Signal peptidase complex subunit; flavivirus polyprotein cleavage at ER",
+          "basis": "Curated host-factor role provided in input",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only contains paper titles about signal peptidase complex and flaviviruses generally, with no title specifically stating SPCS1 cleaves the flavivirus polyprotein at the ER membrane.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42159396",
+              "url": "https://europepmc.org/article/MED/42159396",
+              "snippet": "Zika virus recruits karyopherin \u03b16 for efficient replication via NS2B."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "The signal peptidase complex, including SPCS1, mediates rotavirus VP7 processing and virion assembly.",
+          "asserted_value": "Rotavirus VP7 processing and virion assembly",
+          "basis": "Europe PMC PMID 41860932 title",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42159396",
+              "url": "https://europepmc.org/article/MED/42159396",
+              "snippet": "Zika virus recruits karyopherin \u03b16 for efficient replication via NS2B."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "Signal peptidase complex members are implicated in processing of viral proteins across multiple virus families including flaviviruses and rotaviruses.",
+          "asserted_value": "Flaviviruses and rotaviruses",
+          "basis": "Europe PMC PMIDs 41860932, 41910145, and curated role",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "PMID 41860932 is titled 'Signal peptidase complex mediates rotavirus VP7 processing and virion assembly' (rotavirus) and PMID 41910145 concerns SPCS2 (a signal peptidase complex subunit) as a host factor for JEV, a flavivirus, supporting involvement across both virus families.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42159396",
+              "url": "https://europepmc.org/article/MED/42159396",
+              "snippet": "Zika virus recruits karyopherin \u03b16 for efficient replication via NS2B."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "Signal peptidase (SPP), a related protease in the signal peptidase complex pathway, has been identified as a druggable antiviral target in genome-wide screens.",
+          "asserted_value": "Druggable (SPP homolog identified in antiviral screens)",
+          "basis": "Europe PMC PMID 39969998 title",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only Open Targets (unavailable, all null) and DGIdb (0 interactions) data for SPCS1, with no mention of signal peptidase, antiviral screens, or PMID 39969998, so it neither supports nor corrects the claim.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No known drugs are documented in DGIdb for SPCS1.",
+          "asserted_value": "0 known drugs",
+          "basis": "DGIdb interaction_count: 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb record shows interaction_count: 0 and an empty interactions list, supporting the claim of 0 known drugs.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "SPCS1 is an essential component of the signal peptidase complex responsible for ER protein processing, indicating potential pleiotropy and safety concerns with inhibition.",
+          "asserted_value": "Essential ER protein processing enzyme; potential pleiotropy",
+          "basis": "prior knowledge of SPCS1 biological role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets data unavailable (available: false, safety_liabilities: null) and DGIdb with zero interactions, providing no evidence about SPCS1's role in the signal peptidase complex or associated safety/pleiotropy concerns.",
+          "citations": []
+        },
+        {
+          "field": "expression",
+          "statement": "SPCS1, as a core ER-resident protease, is expected to be widely expressed across tissues given the ubiquitous need for ER protein processing.",
+          "asserted_value": "Ubiquitous/high in ER-containing tissues",
+          "basis": "prior knowledge of signal peptidase complex distribution",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only a list of paper titles/metadata from Europe PMC with no expression data on SPCS1 across tissues, so it neither confirms nor corrects the claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42159396",
+              "url": "https://europepmc.org/article/MED/42159396",
+              "snippet": "Zika virus recruits karyopherin \u03b16 for efficient replication via NS2B."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 6,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 4,
+        "unassessed": 1
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Zhang et al., Cell Reports 2016 \u2014 signal peptide processing pathway required by flaviviruses",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42159396",
+          "url": "https://europepmc.org/article/MED/42159396",
+          "snippet": "Zika virus recruits karyopherin \u03b16 for efficient replication via NS2B."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41860932",
+          "url": "https://europepmc.org/article/MED/41860932",
+          "snippet": "Signal peptidase complex mediates rotavirus VP7 processing and virion assembly."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "RACK1",
+      "source": "Shah et al., Cell 2018 (Krogan lab)",
+      "host_factor_role": "Ribosomal scaffold protein; cap-independent translation support; flavivirus interactome hit.",
+      "summary": "RACK1 \u2014 Ribosomal scaffold protein; cap-independent translation support; flavivirus interactome hit. Druggability 0.15 (no tractability evidence); 2 of 6 specialist claims verified against database records. The independent verifier caught 4 of 6 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting RACK1 could remove a host function the pathogen co-opts (Ribosomal scaffold protein; cap-independent translation support; flavivirus interactome hit), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/6 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of RACK1 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.28,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "RACK1 serves as a ribosomal scaffold protein that supports cap-independent translation.",
+          "asserted_value": "ribosomal scaffold protein",
+          "basis": "Curated host-factor role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles, years, PMIDs, and citation counts with no mention of RACK1 or any description of its molecular function, so it neither confirms nor corrects the asserted role.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42203692",
+              "url": "https://europepmc.org/article/MED/42203692",
+              "snippet": "Research progress on the role of host factors in Chikungunya virus infection and intervention strategies."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910274",
+              "url": "https://europepmc.org/article/MED/41910274",
+              "snippet": "From CRISPR functional genomics to synthetic interventions: engineering antiviral strategies."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "RACK1 is identified as a hit in the flavivirus interactome.",
+          "asserted_value": "flavivirus interactome hit",
+          "basis": "Curated host-factor role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles, years, PMIDs, and citation counts with no mention of RACK1 or any host-factor interactome data supporting the claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42203692",
+              "url": "https://europepmc.org/article/MED/42203692",
+              "snippet": "Research progress on the role of host factors in Chikungunya virus infection and intervention strategies."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910274",
+              "url": "https://europepmc.org/article/MED/41910274",
+              "snippet": "From CRISPR functional genomics to synthetic interventions: engineering antiviral strategies."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "RACK1 has documented involvement in viral infection pathways relevant to flaviviral replication.",
+          "asserted_value": "flavivirus interactome interaction",
+          "basis": "Curated host-factor role indicating flavivirus association",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42203692",
+              "url": "https://europepmc.org/article/MED/42203692",
+              "snippet": "Research progress on the role of host factors in Chikungunya virus infection and intervention strategies."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910274",
+              "url": "https://europepmc.org/article/MED/41910274",
+              "snippet": "From CRISPR functional genomics to synthetic interventions: engineering antiviral strategies."
+            }
+          ]
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No direct small-molecule drug interactions targeting RACK1 are currently recorded in DGIdb.",
+          "asserted_value": "0 known drugs",
+          "basis": "DGIdb interaction_count field showing zero interactions",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb record shows interaction_count: 0 and an empty interactions array, directly supporting the claim of zero known drug interactions.",
+          "citations": []
+        },
+        {
+          "field": "druggability",
+          "statement": "RACK1 druggability remains to be systematically assessed, though its scaffold protein function may present challenges for conventional small-molecule inhibition.",
+          "asserted_value": "uncertain",
+          "basis": "prior knowledge of scaffold protein limitations and absence of known drugs",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets data unavailable and DGIdb reporting zero interactions, providing no basis to confirm or correct the claim about scaffold protein challenges, which relies solely on prior knowledge not present in the record.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "RACK1 has fundamental roles in ribosomal function and cap-independent translation, suggesting potential safety concerns with direct inhibition.",
+          "asserted_value": "potential translational toxicity",
+          "basis": "prior knowledge of RACK1's essential ribosomal scaffold role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and no other safety data, so the claim's basis is prior knowledge not represented in the record.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "Recent literature (2026) discusses host factors in flaviviral infections including Chikungunya and dengue, contexts where RACK1 may be therapeutically relevant.",
+          "asserted_value": "Chikungunya, dengue virus",
+          "basis": "Europe PMC papers (PMID 42203692, 42132421, 42118758) discussing viral infection host factors",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "PMID 42203692 title concerns Chikungunya virus host factors, while PMID 42132421 and 42118758 concern dengue virus, matching the asserted values of Chikungunya and dengue virus.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42203692",
+              "url": "https://europepmc.org/article/MED/42203692",
+              "snippet": "Research progress on the role of host factors in Chikungunya virus infection and intervention strategies."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41910274",
+              "url": "https://europepmc.org/article/MED/41910274",
+              "snippet": "From CRISPR functional genomics to synthetic interventions: engineering antiviral strategies."
+            }
+          ]
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 6,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 4,
+        "unassessed": 1
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Shah et al., Cell 2018 (Krogan lab)",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42203692",
+          "url": "https://europepmc.org/article/MED/42203692",
+          "snippet": "Research progress on the role of host factors in Chikungunya virus infection and intervention strategies."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41910274",
+          "url": "https://europepmc.org/article/MED/41910274",
+          "snippet": "From CRISPR functional genomics to synthetic interventions: engineering antiviral strategies."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42132421",
+          "url": "https://europepmc.org/article/MED/42132421",
+          "snippet": "Longitudinal analysis of viral and host RNA in blood and saliva during controlled human dengue virus 3 infections."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "OSTC",
+      "source": "Marceau et al., Nature 2016",
+      "host_factor_role": "STT3A-specific OST subunit; co-translational glycosylation.",
+      "summary": "OSTC \u2014 STT3A-specific OST subunit; co-translational glycosylation. Druggability 0.15 (no tractability evidence); 2 of 7 specialist claims verified against database records. The independent verifier caught 5 of 7 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting OSTC could remove a host function the pathogen co-opts (STT3A-specific OST subunit; co-translational glycosylation), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.67, 2/7 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of OSTC (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.67,
+      "confidence": 0.24,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "OSTC is a subunit of the oligosaccharyltransferase complex specific to STT3A, mediating co-translational N-linked glycosylation.",
+          "asserted_value": "STT3A-specific OST subunit",
+          "basis": "Curated host-factor role provided in input",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only a list of Europe PMC paper titles/metadata with no mention of OSTC, OST complex, or STT3A, so it neither confirms nor corrects the claimed host-factor role.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41902231",
+              "url": "https://europepmc.org/article/MED/41902231",
+              "snippet": "Tree Shrew Genome-Wide CRISPR Screen Identifies RNF6 as a Proviral Host Factor for Zika Virus Replication in Brain Micro"
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "OSTC lacks known small-molecule inhibitors in drug development databases.",
+          "asserted_value": "No known drugs",
+          "basis": "DGIdb interaction_count field shows 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb record shows interaction_count of 0 with an empty interactions list, supporting the claim of no known drugs.",
+          "citations": []
+        },
+        {
+          "field": "known_drugs",
+          "statement": "There are no drugs currently known to target OSTC.",
+          "asserted_value": "0",
+          "basis": "DGIdb interactions field is empty",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "DGIdb's interaction_count is 0 and interactions list is empty, supporting that no drugs are known to target OSTC.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "OSTC has not been identified as a proviral or antiviral host factor in recent CRISPR screening studies of pandemic viruses.",
+          "asserted_value": "No direct evidence",
+          "basis": "Europe PMC search returned no results mentioning OSTC in viral infection contexts; meta-analyses on CRISPR screening for viral host factors do not cite OSTC",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record lists only paper titles with no abstracts or content confirming whether OSTC was mentioned or excluded, so the claim that OSTC is absent from these studies cannot be verified from the given titles alone.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41902231",
+              "url": "https://europepmc.org/article/MED/41902231",
+              "snippet": "Tree Shrew Genome-Wide CRISPR Screen Identifies RNF6 as a Proviral Host Factor for Zika Virus Replication in Brain Micro"
+            }
+          ]
+        },
+        {
+          "field": "expression",
+          "statement": "OSTC expression is expected in tissues with high protein synthesis demand, particularly those involved in secretory pathways.",
+          "asserted_value": "Ubiquitous with tissue-specific variation",
+          "basis": "prior knowledge of OST complex localization and function",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only a list of Europe PMC paper titles about viral CRISPR screens and host factors, with no data on OSTC tissue expression patterns to confirm or correct the claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41902231",
+              "url": "https://europepmc.org/article/MED/41902231",
+              "snippet": "Tree Shrew Genome-Wide CRISPR Screen Identifies RNF6 as a Proviral Host Factor for Zika Virus Replication in Brain Micro"
+            }
+          ]
+        },
+        {
+          "field": "safety",
+          "statement": "Co-translational glycosylation is essential for protein folding and cell viability, making OSTC inhibition potentially broadly toxic.",
+          "asserted_value": "High toxicity risk",
+          "basis": "prior knowledge of glycosylation essentiality in eukaryotic cells",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and unavailable, and DGIdb has zero interactions, so no data in the record supports or contradicts the claimed toxicity risk, which is based solely on prior knowledge.",
+          "citations": []
+        },
+        {
+          "field": "druggability",
+          "statement": "The oligosaccharyltransferase complex is challenging to drug due to its catalytic active site depth and cofactor requirements.",
+          "asserted_value": "Low tractability",
+          "basis": "prior knowledge of OST structural biology and enzyme mechanism",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets tractability data unavailable (available: false, tractability_positive_buckets: null) and DGIdb shows zero interactions, so neither source supports or corrects the claimed 'Low tractability' assessment.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 7,
+        "confirmed": 2,
+        "corrected": 0,
+        "unsupported": 5,
+        "unassessed": 0
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Marceau et al., Nature 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41902231",
+          "url": "https://europepmc.org/article/MED/41902231",
+          "snippet": "Tree Shrew Genome-Wide CRISPR Screen Identifies RNF6 as a Proviral Host Factor for Zika Virus Replication in Brain Micro"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 38793607",
+          "url": "https://europepmc.org/article/MED/38793607",
+          "snippet": "CRISPR Screen Reveals PACT as a Pro-Viral Factor for Dengue Viral Replication."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "STT3B",
+      "source": "Marceau et al., Nature 2016",
+      "host_factor_role": "OST catalytic paralog; post-translational N-glycosylation required for flavivirus replication.",
+      "summary": "STT3B \u2014 OST catalytic paralog; post-translational N-glycosylation required for flavivirus replication. Druggability 0.15 (no tractability evidence); 1 of 4 specialist claims verified against database records. The independent verifier caught 3 of 4 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting STT3B could remove a host function the pathogen co-opts (OST catalytic paralog; post-translational N-glycosylation required for flavivirus replication), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.58, 1/4 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of STT3B (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.58,
+      "confidence": 0.2,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "STT3B is an OST catalytic paralog required for post-translational N-glycosylation essential to flavivirus replication.",
+          "asserted_value": "OST catalytic paralog; flavivirus N-glycosylation dependency",
+          "basis": "Curated host-factor role",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "STT3B has been implicated in dengue and Zika virus infection through studies of host protein complex assembly during flaviviral infection.",
+          "asserted_value": "dengue, Zika virus",
+          "basis": "Europe PMC PMID 40612902: STT3A-mediated mega protein complex assembly during dengue and Zika virus infection",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The record's PMID 40612902 title explicitly attributes the mega protein complex assembly to STT3A, not STT3B, so it does not support the claim that STT3B was implicated in this study.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "STT3B is a candidate target for therapeutic intervention against viral N-glycosylation modification in flavivirus infection.",
+          "asserted_value": "N-glycosylation inhibition therapeutic potential",
+          "basis": "Europe PMC PMID 41131269: Therapeutic Targeting of Viral N-Glycosylation Modification",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "STT3B is part of the endoplasmic reticulum machinery implicated in flavivirus infection and replication.",
+          "asserted_value": "ER-resident OST complex component",
+          "basis": "Europe PMC PMID 40295816: ER as crucial hub in flavivirus infection",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists the paper title/metadata for PMID 40295816 with no content about STT3B or the OST complex, so it cannot confirm or correct the specific claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 41131269",
+              "url": "https://europepmc.org/article/MED/41131269",
+              "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "STT3B has no known small-molecule drugs in the DGIdb database.",
+          "asserted_value": "0 drugs",
+          "basis": "DGIdb drug-gene interactions: interaction_count: 0",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb field shows interaction_count: 0 and an empty interactions list, supporting the claim of 0 known drugs.",
+          "citations": []
+        },
+        {
+          "field": "druggability",
+          "statement": "STT3B represents an undrugged target with potential for inhibitor development given its catalytic OST function in glycosylation.",
+          "asserted_value": "undrugged, catalytic domain targetable",
+          "basis": "prior knowledge of OST enzymatic mechanism and absence of DGIdb records",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only shows DGIdb interaction_count of 0 and Open Targets data unavailable, with no information on catalytic domain targetability or OST enzymatic mechanism to support the specific claim.",
+          "citations": []
+        },
+        {
+          "field": "safety",
+          "statement": "STT3B has a paralog (STT3A) that may compensate for loss-of-function, requiring assessment of selectivity for antiviral intervention.",
+          "asserted_value": "STT3A paralog compensation risk",
+          "basis": "prior knowledge of STT3 family redundancy and Europe PMC focus on both STT3A and STT3B",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 4,
+        "confirmed": 1,
+        "corrected": 0,
+        "unsupported": 3,
+        "unassessed": 3
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Marceau et al., Nature 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 41131269",
+          "url": "https://europepmc.org/article/MED/41131269",
+          "snippet": "Therapeutic Targeting of Viral N-Glycosylation Modification: From Molecular Mechanisms to Clinical Application Prospects"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40612902",
+          "url": "https://europepmc.org/article/MED/40612902",
+          "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40372436",
+          "url": "https://europepmc.org/article/MED/40372436",
+          "snippet": "Shared host genetic landscape of respiratory viral infection."
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "SEC61B",
+      "source": "Shah et al., Cell 2018 \u2014 comparative flavivirus-host protein interaction map (Krogan lab)",
+      "host_factor_role": "Sec61 translocon subunit; co-translational insertion of viral proteins; Krogan interactome hit.",
+      "summary": "SEC61B \u2014 Sec61 translocon subunit; co-translational insertion of viral proteins; Krogan interactome hit. Druggability 0.15 (no tractability evidence); 1 of 6 specialist claims verified against database records. The independent verifier caught 5 of 6 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting SEC61B could remove a host function the pathogen co-opts (Sec61 translocon subunit; co-translational insertion of viral proteins; Krogan interactome hit), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia; any candidate here must clear that target-engagement/timing bar.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.58, 1/6 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of SEC61B (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.58,
+      "confidence": 0.13,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "SEC61B encodes a subunit of the Sec61 translocon complex required for co-translational insertion of viral proteins into the endoplasmic reticulum.",
+          "asserted_value": "Sec61 translocon subunit",
+          "basis": "Curated host-factor role provided in input",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only Europe PMC paper titles with no mention of SEC61B or the Sec61 translocon subunit function, so the asserted role cannot be verified from this record.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40733526",
+              "url": "https://europepmc.org/article/MED/40733526",
+              "snippet": "Emerging Arthropod-Borne Viruses Hijack the Host Cell Cytoskeleton During Neuroinvasion."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "SEC61B was identified as a hit in the Krogan interactome studies of viral-host protein interactions.",
+          "asserted_value": "Krogan interactome hit",
+          "basis": "Curated host-factor role provided in input",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists Europe PMC paper titles and metadata with no mention of SEC61B, Krogan, or any interactome hit data.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40733526",
+              "url": "https://europepmc.org/article/MED/40733526",
+              "snippet": "Emerging Arthropod-Borne Viruses Hijack the Host Cell Cytoskeleton During Neuroinvasion."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "A 2024 study on flaviviruses demonstrates that these viruses induce ER-specific remodeling of protein synthesis, directly implicating the Sec61 translocon in viral replication.",
+          "asserted_value": "Flavivirus replication requires ER protein synthesis remodeling",
+          "basis": "Europe PMC record PMID 39621795: 'Flaviviruses induce ER-specific remodelling of protein synthesis' (cited 8 times)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists the paper's title, year, PMID, and citation count with no mention of the Sec61 translocon or details about the mechanism of ER protein synthesis remodeling, so it cannot support the specific claim that Sec61 is directly implicated.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40733526",
+              "url": "https://europepmc.org/article/MED/40733526",
+              "snippet": "Emerging Arthropod-Borne Viruses Hijack the Host Cell Cytoskeleton During Neuroinvasion."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "A 2026 meta-analysis of functional genomics studies across viruses of pandemic concern identifies conserved cellular pathways required by multiple virus types.",
+          "asserted_value": "Conserved viral pathway requirement",
+          "basis": "Europe PMC record PMID 42327991: 'Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern'",
+          "verdict": "unassessed",
+          "corrected_value": "",
+          "rationale": "Independent verification unavailable (safety classifier declined); excluded from the ablation.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40733526",
+              "url": "https://europepmc.org/article/MED/40733526",
+              "snippet": "Emerging Arthropod-Borne Viruses Hijack the Host Cell Cytoskeleton During Neuroinvasion."
+            }
+          ]
+        },
+        {
+          "field": "druggability",
+          "statement": "SEC61B is not currently targeted by known drugs in the DGIdb database.",
+          "asserted_value": "0 known drugs",
+          "basis": "DGIdb interaction_count field shows 0 interactions",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb field shows interaction_count: 0 and an empty interactions list, matching the claim of 0 known drugs.",
+          "citations": []
+        },
+        {
+          "field": "expression",
+          "statement": "SEC61B encodes a core component of the endoplasmic reticulum translocon that is constitutively expressed in cells with high secretory activity.",
+          "asserted_value": "ER-localized, broadly expressed",
+          "basis": "prior knowledge of Sec61 biology",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only a list of paper titles/metadata with no expression or localization data for SEC61B, so it neither confirms nor corrects the claimed value.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42327991",
+              "url": "https://europepmc.org/article/MED/42327991",
+              "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40733526",
+              "url": "https://europepmc.org/article/MED/40733526",
+              "snippet": "Emerging Arthropod-Borne Viruses Hijack the Host Cell Cytoskeleton During Neuroinvasion."
+            }
+          ]
+        },
+        {
+          "field": "safety",
+          "statement": "SEC61B is an essential component of the protein translocation machinery; inhibition may have significant cytotoxicity due to disruption of normal ER protein synthesis.",
+          "asserted_value": "Potential broad ER dysfunction toxicity",
+          "basis": "prior knowledge of Sec61 essentiality in eukaryotic cells",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and available false, and DGIdb has no interactions, so no data in the record supports or corrects the claimed safety concern, which is based solely on prior knowledge.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 6,
+        "confirmed": 1,
+        "corrected": 0,
+        "unsupported": 5,
+        "unassessed": 1
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Shah et al., Cell 2018 \u2014 comparative flavivirus-host protein interaction map (Krogan lab)",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42327991",
+          "url": "https://europepmc.org/article/MED/42327991",
+          "snippet": "Meta-analysis of functional genomics studies reveals conserved cellular pathways required by viruses of pandemic concern"
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40733526",
+          "url": "https://europepmc.org/article/MED/40733526",
+          "snippet": "Emerging Arthropod-Borne Viruses Hijack the Host Cell Cytoskeleton During Neuroinvasion."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID None",
+          "url": "https://europepmc.org/article/PPR/PPR1215655",
+          "snippet": "V-SWITCH: A single-vector OFF-to-ON fluorescent reporter of live RNA virus infections"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "gene": "MAGT1",
+      "source": "Marceau et al., Nature 2016",
+      "host_factor_role": "STT3B-specific OST subunit with oxidoreductase activity; flavivirus dependency factor.",
+      "summary": "MAGT1 \u2014 STT3B-specific OST subunit with oxidoreductase activity; flavivirus dependency factor. Druggability 0.15 (no tractability evidence); 1 of 7 specialist claims verified against database records. The independent verifier caught 6 of 7 specialist claims against the source records.",
+      "mechanistic_hypothesis": "Pharmacologically inhibiting MAGT1 could remove a host function the pathogen co-opts (STT3B-specific OST subunit with oxidoreductase activity; flavivirus dependency factor), blocking replication without directly targeting a viral protein.",
+      "why_prior_failed": "Host-directed anti-dengue candidates have repeatedly failed in controlled trials (chloroquine, celgosivir, ivermectin) mainly from insufficient in-vivo target engagement at tolerated doses and dosing after peak viremia \u2014 celgosivir, a host alpha-glucosidase (glycosylation) inhibitor, is the most directly relevant precedent for this glycosylation-pathway target.",
+      "recommendation": "insufficient-evidence",
+      "recommendation_rationale": "Rule-based call from verified evidence: druggability 0.15, evidence strength 0.58, 1/7 claims verified; LLM synthesis unavailable.",
+      "validation_experiment": "CRISPRi/knockdown of MAGT1 (plus chemical inhibition where a tool compound exists) in a permissive human cell line, read out by viral-yield reduction with a paired host-cytotoxicity counter-screen.",
+      "druggability_score": 0.15,
+      "evidence_strength": 0.58,
+      "confidence": 0.11,
+      "n_known_drugs": 0,
+      "known_drugs": [],
+      "tractability": "no tractability evidence",
+      "verified_claims": [
+        {
+          "field": "host_factor_role",
+          "statement": "MAGT1 is a flavivirus dependency factor and STT3B-specific subunit of the oligosaccharyltransferase complex.",
+          "asserted_value": "OST subunit; flavivirus dependency factor",
+          "basis": "Curated host-factor role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record contains only paper titles/metadata with no mention of MAGT1, STT3B, or its role as an OST subunit, so it neither confirms nor corrects the claim.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42041142",
+              "url": "https://europepmc.org/article/MED/42041142",
+              "snippet": "Genetic mechanisms underlying host susceptibility to central nervous system viral infections."
+            }
+          ]
+        },
+        {
+          "field": "host_factor_role",
+          "statement": "MAGT1 possesses oxidoreductase activity relevant to protein glycosylation during viral infection.",
+          "asserted_value": "oxidoreductase activity",
+          "basis": "Curated host-factor role",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles, years, PMIDs, and citation counts with no mention of MAGT1 or any description of its molecular function or oxidoreductase activity.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42041142",
+              "url": "https://europepmc.org/article/MED/42041142",
+              "snippet": "Genetic mechanisms underlying host susceptibility to central nervous system viral infections."
+            }
+          ]
+        },
+        {
+          "field": "known_drugs",
+          "statement": "No known drugs target MAGT1 in current drug-gene interaction databases.",
+          "asserted_value": "0",
+          "basis": "DGIdb drug-gene interactions (interaction_count: 0)",
+          "verdict": "confirmed",
+          "corrected_value": "",
+          "rationale": "The DGIdb field shows interaction_count: 0 and an empty interactions list, directly supporting that no known drugs target MAGT1.",
+          "citations": []
+        },
+        {
+          "field": "druggability",
+          "statement": "MAGT1 is a protein component of the OST complex with enzymatic activity, suggesting potential ligandability through active site targeting.",
+          "asserted_value": "Potentially tractable",
+          "basis": "prior knowledge (oxidoreductase function implies active site)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets tractability data as null/unavailable and DGIdb with zero interactions, so no evidence in the record supports the claimed 'Potentially tractable' assertion.",
+          "citations": []
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "MAGT1 is implicated in dengue and Zika virus infection mechanisms as demonstrated in genome-wide CRISPR screening studies.",
+          "asserted_value": "dengue, Zika",
+          "basis": "Europe PMC literature (PMIDs 36298718, 40612902, 37891676)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles/metadata (no abstracts or content confirming MAGT1's role), and none of the titles for PMIDs 36298718, 40612902, or 37891676 mention MAGT1 specifically, so the record does not verify the asserted gene-virus link.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42041142",
+              "url": "https://europepmc.org/article/MED/42041142",
+              "snippet": "Genetic mechanisms underlying host susceptibility to central nervous system viral infections."
+            }
+          ]
+        },
+        {
+          "field": "prior_antiviral_evidence",
+          "statement": "MAGT1 has been identified as a host factor in flavivirus-host interaction studies using CRISPR-based discovery approaches.",
+          "asserted_value": "Flavivirus host factor",
+          "basis": "Europe PMC literature (PMID 36298718 cited 9 times, PMID 37891676 cited 5 times)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record only lists paper titles/metadata (PMIDs 36298718 and 37891676 about flavivirus-host CRISPR screens generally) but contains no mention of MAGT1 or any gene-specific findings, so it cannot confirm MAGT1 was identified as a flavivirus host factor.",
+          "citations": [
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 40612902",
+              "url": "https://europepmc.org/article/MED/40612902",
+              "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+            },
+            {
+              "source": "Europe PMC",
+              "ref": "PMID 42041142",
+              "url": "https://europepmc.org/article/MED/42041142",
+              "snippet": "Genetic mechanisms underlying host susceptibility to central nervous system viral infections."
+            }
+          ]
+        },
+        {
+          "field": "safety",
+          "statement": "MAGT1 is an essential component of the OST complex required for N-linked glycosylation, indicating potential for cellular toxicity if completely inhibited.",
+          "asserted_value": "Essential OST function",
+          "basis": "prior knowledge (OST criticality in protein synthesis)",
+          "verdict": "unsupported",
+          "corrected_value": "",
+          "rationale": "The raw record shows Open Targets safety_liabilities as null and available false, and DGIdb has no interaction data, so neither field supports or contradicts the claim about MAGT1's role in OST-mediated N-linked glycosylation.",
+          "citations": []
+        }
+      ],
+      "verifier_stats": {
+        "proposed": 7,
+        "confirmed": 1,
+        "corrected": 0,
+        "unsupported": 6,
+        "unassessed": 0
+      },
+      "citations": [
+        {
+          "source": "host-factor screen",
+          "ref": "Marceau et al., Nature 2016",
+          "url": "",
+          "snippet": ""
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 40612902",
+          "url": "https://europepmc.org/article/MED/40612902",
+          "snippet": "STT3A-mediated mega protein complex assembly during dengue and Zika virus infection."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 42041142",
+          "url": "https://europepmc.org/article/MED/42041142",
+          "snippet": "Genetic mechanisms underlying host susceptibility to central nervous system viral infections."
+        },
+        {
+          "source": "Europe PMC",
+          "ref": "PMID 37891676",
+          "url": "https://europepmc.org/article/MED/37891676",
+          "snippet": "CRISPR-Cas system to discover host-virus interactions in Flaviviridae."
+        }
+      ],
+      "error": ""
+    }
+  ]
+}
