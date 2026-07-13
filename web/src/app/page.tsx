@@ -112,9 +112,11 @@ export default function Landing() {
             ))}
           </div>
         </div>
-        <div className="relative h-[380px] lg:h-[460px] card overflow-hidden" style={{ background: "radial-gradient(120% 80% at 50% 0%, #14202f 0%, #0f0f0e 70%)" }}>
+        <div className="relative h-[380px] lg:h-[460px] card overflow-hidden">
+          <div className="absolute inset-0" style={{ backgroundImage: "url(/gen/hero.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.6 }} />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(130% 100% at 50% 0%, transparent 25%, #0c0c0b 90%)" }} />
           <DnaHelix className="absolute inset-0 h-full w-full" />
-          <div className="absolute bottom-3 left-0 right-0 text-center text-[11px] mono" style={{ color: C.muted }}>
+          <div className="absolute bottom-3 left-0 right-0 text-center text-[11px] mono" style={{ color: C.ink2 }}>
             the target is written in the host’s own biology
           </div>
         </div>
@@ -222,12 +224,16 @@ export default function Landing() {
 
       {/* final CTA */}
       <section className="mx-auto max-w-6xl px-5 pb-24 pt-6">
-        <Reveal className="card p-10 text-center" style={{ background: "radial-gradient(120% 120% at 50% 0%, #14202f 0%, #0f0f0e 75%)" }}>
-          <h2 className="display text-[30px] font-extrabold mb-2" style={{ textWrap: "balance" } as React.CSSProperties}>Ask the agent. Trust the evidence.</h2>
-          <p className="text-[14px] mb-6 max-w-lg mx-auto" style={{ color: C.ink2 }}>See Claude reason over real biomedical data — with every claim independently verified in front of you.</p>
-          <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
-            Launch Aquiles <ArrowRight size={18} />
-          </Link>
+        <Reveal className="card p-10 text-center relative overflow-hidden">
+          <div className="absolute inset-0" style={{ backgroundImage: "url(/gen/cell.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.22 }} />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(120% 120% at 50% 0%, rgba(15,26,20,0.4) 0%, #0c0c0b 82%)" }} />
+          <div className="relative">
+            <h2 className="display text-[30px] font-extrabold mb-2" style={{ textWrap: "balance" } as React.CSSProperties}>Ask the agent. Trust the evidence.</h2>
+            <p className="text-[14px] mb-6 max-w-lg mx-auto" style={{ color: C.ink2 }}>See Claude reason over real biomedical data — with every claim independently verified in front of you.</p>
+            <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
+              Launch Aquiles <ArrowRight size={18} />
+            </Link>
+          </div>
         </Reveal>
         <div className="mt-8 text-center text-[11px]" style={{ color: C.muted }}>
           Evidence: Open Targets · DGIdb · Europe PMC. Human-in-the-loop; not a diagnosis or treatment recommendation. Built with Claude.
