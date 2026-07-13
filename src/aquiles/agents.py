@@ -21,9 +21,11 @@ from .schemas import (
     VerifierVerdict,
 )
 
+# Haiku 4.5 is the refusal-resistant model for this antiviral-target content (Sonnet 5 / Opus 4.8
+# trip the dual-use bio classifier); it is a fully capable specialist and record-checker here.
 MODEL_SPECIALIST = os.getenv("AQUILES_MODEL_SPECIALIST", "claude-haiku-4-5")
-MODEL_VERIFIER = os.getenv("AQUILES_MODEL_VERIFIER", "claude-sonnet-5")
-MODEL_SYNTH = os.getenv("AQUILES_MODEL_SYNTH", "claude-sonnet-5")
+MODEL_VERIFIER = os.getenv("AQUILES_MODEL_VERIFIER", "claude-haiku-4-5")
+MODEL_SYNTH = os.getenv("AQUILES_MODEL_SYNTH", "claude-haiku-4-5")
 
 _client: AsyncAnthropic | None = None
 

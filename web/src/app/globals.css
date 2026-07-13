@@ -1,44 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --plane: #0d0d0d;
-  --surface: #1a1a19;
-  --surface-2: #222221;
-  --ink: #ffffff;
-  --ink-2: #c3c2b7;
-  --muted: #898781;
-  --grid: #2c2c2a;
-  --baseline: #383835;
-  --ring: rgba(255, 255, 255, 0.10);
-  /* categorical (dark steps) */
-  --blue: #3987e5;
+  --plane: #0b0b0a;
+  --surface: #161615;
+  --surface-2: #1e1e1c;
+  --surface-3: #26262300;
+  --ink: #f5f5f2;
+  --ink-2: #b9b8b0;
+  --muted: #86847c;
+  --grid: #262624;
+  --baseline: #38383400;
+  --ring: rgba(255, 255, 255, 0.09);
+  --ring-2: rgba(255, 255, 255, 0.14);
+  /* accent (validated categorical blue) + status */
+  --accent: #4a90e8;
   --aqua: #199e70;
   --violet: #9085e9;
-  --orange: #d95926;
-  /* status */
-  --good: #0ca30c;
-  --warning: #fab219;
+  --good: #17b317;
+  --warning: #f5b431;
   --serious: #ec835a;
-  --critical: #d03b3b;
+  --critical: #e0524f;
 }
 
-html, body {
-  background: var(--plane);
-  color: var(--ink);
-  min-height: 100%;
-}
+html, body { background: var(--plane); color: var(--ink); min-height: 100%; }
 body {
-  font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* faint scientific grid texture */
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(74, 144, 232, 0.06), transparent 60%),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: auto, 44px 44px, 44px 44px;
+  background-position: 0 0, -1px -1px, -1px -1px;
 }
 .card {
   background: var(--surface);
   border: 1px solid var(--ring);
   border-radius: 14px;
 }
+.card-2 { background: var(--surface-2); border: 1px solid var(--ring); border-radius: 12px; }
+.display { font-family: var(--font-display), var(--font-sans), sans-serif; letter-spacing: -0.02em; }
+.mono { font-family: var(--font-mono), ui-monospace, monospace; }
 .tabnum { font-variant-numeric: tabular-nums; }
-.mono { font-family: var(--font-geist-mono), ui-monospace, monospace; }
-::selection { background: var(--blue); color: #fff; }
-* { scrollbar-width: thin; scrollbar-color: #34342f transparent; }
+::selection { background: var(--accent); color: #fff; }
+* { scrollbar-width: thin; scrollbar-color: #333330 transparent; }
 *::-webkit-scrollbar { width: 8px; height: 8px; }
-*::-webkit-scrollbar-thumb { background: #34342f; border-radius: 8px; }
+*::-webkit-scrollbar-thumb { background: #333330; border-radius: 8px; }
+
+@keyframes blink { 50% { opacity: 0.25; } }
+.caret { animation: blink 1s step-end infinite; }
+@keyframes fadein { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+.fadein { animation: fadein 0.25s ease-out; }
+@media (prefers-reduced-motion: reduce) { .caret, .fadein { animation: none; } }
