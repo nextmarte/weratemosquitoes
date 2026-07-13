@@ -51,7 +51,7 @@ function TargetIcon({ size = 42, color = C.accent }: { size?: number; color?: st
 
 const STEPS = [
   { icon: <VirusIcon />, n: "01", title: "The virus hijacks your cells", body: "A virus can't reproduce on its own. To copy itself, it grabs onto dozens of your own human proteins — the machinery it can't live without." },
-  { icon: <TargetIcon />, n: "02", title: "Aquiles finds the weak point", body: "Claude reads the world's evidence — drug databases and millions of papers — and ranks which of those human proteins are both essential to the virus and hittable by a drug: the virus's Achilles heel." },
+  { icon: <TargetIcon />, n: "02", title: "Aquiles finds the weak point", body: "Claude reads the world's evidence — drug databases and millions of papers — and ranks which of those human proteins are both essential to the virus and hittable by a drug: the virus's Aquiles heel." },
   { icon: <ShieldCheck size={42} color={C.good} strokeWidth={2} />, n: "03", title: "An independent AI checks everything", body: "The twist: a separate verifier re-checks every single claim against the original source data — catching the mistakes a self-checking AI would confidently keep." },
 ];
 
@@ -104,7 +104,7 @@ export default function Landing() {
             Built with Claude · Life Sciences
           </div>
           <h1 className="display text-[clamp(34px,6vw,60px)] font-extrabold leading-[1.02]" style={{ textWrap: "balance" } as React.CSSProperties}>
-            Every virus has an <span style={{ color: C.accent }}>Achilles heel.</span>
+            Every virus has an <span style={{ color: C.accent }}>Aquiles heel.</span>
           </h1>
           <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed" style={{ color: C.ink2 }}>
             Dengue and Zika have no cure — they survive by hijacking your own cells. <b style={{ color: "#fff" }}>Aquiles</b> finds

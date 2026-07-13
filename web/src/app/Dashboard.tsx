@@ -272,6 +272,9 @@ function ChatBubble({ m, streaming }: { m: Msg; streaming: boolean }) {
       )}
       <div className="rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap" style={{ background: "#ffffff07", border: `1px solid ${HEX.grid}`, color: HEX.ink2 }}>
         {renderMd(m.text)}
+        {!m.text && streaming && m.tools.some((t) => !t.done) && (
+          <span className="text-[12px] italic" style={{ color: HEX.muted }}>running the verified pipeline — this can take ~30s…</span>
+        )}
         {streaming && <span className="caret" style={{ color: HEX.accent }}>▍</span>}
         {m.notice && <div className="mt-1.5 text-[11px]" style={{ color: HEX.serious }}>{m.notice}</div>}
       </div>
