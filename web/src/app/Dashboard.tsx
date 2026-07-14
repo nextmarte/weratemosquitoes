@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
   ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend,
 } from "recharts";
-import { ShieldCheck, Crosshair, ExternalLink, ArrowUp, Check, Sparkles, ArrowLeft, Loader2, Repeat } from "lucide-react";
+import { ShieldCheck, Crosshair, ExternalLink, ArrowUp, Check, Sparkles, ArrowLeft, Loader2, Repeat, Home, PlayCircle } from "lucide-react";
+import Tour from "./Tour";
 
 /* ---------- types ---------- */
 interface Citation { source: string; ref: string; url?: string; snippet?: string }
@@ -26,6 +28,9 @@ interface Dossier {
 interface Payload { n_targets: number; generated_seconds: number; verifier: { caught_pct: number }; dossiers: Dossier[] }
 type ToolChip = { name: string; done: boolean; count: number };
 type Msg = { role: "user" | "assistant"; text: string; tools: ToolChip[]; notice?: string };
+
+// base path when deployed under a sub-path (e.g. /achilles); empty locally.
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 /* ---------- palette ---------- */
 const HEX = {
@@ -75,14 +80,25 @@ export default function Dashboard() {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
   const scroller = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/dossiers.json").then((r) => r.json()).then((d: Payload) => {
+    fetch(`${BASE}/dossiers.json`).then((r) => r.json()).then((d: Payload) => {
       setData(d); setDossiers(d.dossiers); setSel(d.dossiers[0]?.gene ?? null);
     }).catch(() => {});
   }, []);
   useEffect(() => { scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" }); }, [msgs]);
+
+  // guided tour: open on ?tour=1 (from the landing CTA), and prime the UI per step
+  useEffect(() => {
+    if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("tour") === "1") setTourOpen(true);
+  }, []);
+  const handleTourStep = useCallback((id: string) => {
+    if (id === "t5_dossier") {
+      setSel((prev) => prev ?? (dossiers.find((d) => d.repurposing?.has_candidate) ?? dossiers.find((d) => d.recommendation === "go") ?? dossiers[0])?.gene ?? null);
+    }
+  }, [dossiers]);
 
   const agg = useMemo(() => {
     const a = { proposed: 0, confirmed: 0, corrected: 0, unsupported: 0, unassessed: 0 };
@@ -103,7 +119,7 @@ export default function Dashboard() {
     setBusy(true);
     const update = (fn: (m: Msg) => void) => setMsgs((prev) => { const c = [...prev]; fn(c[c.length - 1]); return c; });
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(`${BASE}/api/chat`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: history.map((m) => ({ role: m.role, content: m.text })) }),
       });
@@ -139,25 +155,35 @@ export default function Dashboard() {
     <main className="mx-auto max-w-[1360px] px-4 py-5 lg:h-screen lg:flex lg:flex-col">
       {/* header */}
       <header className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-3 shrink-0">
-        <div className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5" title="Back to landing page">
           <span className="grid h-8 w-8 place-items-center rounded-lg" style={{ background: "#4a90e820", border: "1px solid #4a90e855" }}>
             <ShieldCheck size={18} color={HEX.accent} />
           </span>
           <span className="display text-[22px] font-extrabold">Aquiles</span>
-          <span className="mono text-[10.5px] px-2 py-0.5 rounded-md hidden sm:inline" style={{ color: HEX.ink2, background: "#ffffff0d" }}>
-            verified antiviral target discovery
-          </span>
-        </div>
+        </Link>
+        <span className="mono text-[10.5px] px-2 py-0.5 rounded-md hidden sm:inline" style={{ color: HEX.ink2, background: "#ffffff0d" }}>
+          verified antiviral target discovery
+        </span>
         <div className="flex items-center gap-2 ml-auto flex-wrap text-[11.5px]">
           <Chip icon={<Crosshair size={12} />} k="targets" v={String(data?.n_targets ?? dossiers.length)} />
           <Chip icon={<ShieldCheck size={12} />} k="verifier caught" v={`${caught}/${agg.proposed}`} accent={HEX.warning} big />
           <Chip icon={<Sparkles size={12} />} k="go / watch" v={String(goCount)} accent={HEX.good} />
+          <button onClick={() => setTourOpen(true)} title="Guided voice tour"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-semibold"
+            style={{ background: "#4a90e814", border: "1px solid #4a90e855", color: HEX.accent }}>
+            <PlayCircle size={13} /> Take the tour
+          </button>
+          <Link href="/" title="Landing page"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5"
+            style={{ border: `1px solid ${HEX.ring}`, color: HEX.ink2 }}>
+            <Home size={13} /> Home
+          </Link>
         </div>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,44fr)_minmax(0,56fr)] gap-3 lg:flex-1 lg:min-h-0">
         {/* ── chat console ── */}
-        <section className="card flex flex-col min-h-[520px] lg:min-h-0 overflow-hidden">
+        <section data-tour="chat" className="card flex flex-col min-h-[520px] lg:min-h-0 overflow-hidden">
           <div className="px-4 py-2.5 border-b flex items-center gap-2" style={{ borderColor: HEX.grid }}>
             <span className="h-2 w-2 rounded-full" style={{ background: HEX.good }} />
             <span className="text-[12px] font-medium" style={{ color: HEX.ink2 }}>Aquiles agent</span>
@@ -200,7 +226,7 @@ export default function Dashboard() {
         {/* ── evidence panel ── */}
         <section className="flex flex-col gap-3 lg:min-h-0 lg:overflow-y-auto pr-0.5">
           {/* verifier strip */}
-          <div className="card p-3.5 shrink-0">
+          <div data-tour="verifier" className="card p-3.5 shrink-0">
             <div className="flex items-center justify-between mb-1.5 flex-wrap gap-2">
               <div className="text-[12px] font-medium" style={{ color: HEX.ink2 }}>
                 Independent-verifier impact <span style={{ color: HEX.muted }}>· each claim checked vs. the raw DB record, in isolation</span>
@@ -222,7 +248,7 @@ export default function Dashboard() {
           </div>
 
           {/* landscape */}
-          <div className="card p-3.5 shrink-0">
+          <div data-tour="landscape" className="card p-3.5 shrink-0">
             <div className="text-[12px] font-medium mb-0.5" style={{ color: HEX.ink2 }}>Target landscape</div>
             <div className="text-[10.5px] mb-1" style={{ color: HEX.muted }}>druggability × verified evidence · bubble = known drugs · click a target</div>
             <div style={{ height: 230 }}>
@@ -244,12 +270,16 @@ export default function Dashboard() {
           </div>
 
           {/* selected dossier | table */}
-          {selected ? <DossierView d={selected} onBack={() => setSel(null)} /> : <RankedTable dossiers={dossiers} onPick={setSel} />}
+          <div data-tour="dossier">
+            {selected ? <DossierView d={selected} onBack={() => setSel(null)} /> : <RankedTable dossiers={dossiers} onPick={setSel} />}
+          </div>
         </section>
       </div>
       <footer className="mt-2 text-[10.5px] shrink-0" style={{ color: HEX.muted }}>
         Evidence: Open Targets · DGIdb · Europe PMC (public). Human-in-the-loop; not a diagnosis or treatment recommendation. Built with Claude.
       </footer>
+
+      <Tour open={tourOpen} onClose={() => setTourOpen(false)} onStep={handleTourStep} />
     </main>
   );
 }

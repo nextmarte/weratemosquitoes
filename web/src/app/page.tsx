@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import DnaHelix from "./DnaHelix";
-import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat, Database, Workflow, Volume2, VolumeX } from "lucide-react";
+import { ShieldCheck, ArrowRight, Crosshair, ShieldQuestion, Repeat, Database, Workflow, Volume2, VolumeX, PlayCircle } from "lucide-react";
 
 const C = {
   accent: "#4a90e8", aqua: "#19a06e", warning: "#f5b431", good: "#17b317", critical: "#e0524f",
   ink: "#f5f5f2", ink2: "#b9b8b0", muted: "#86847c", ring: "#ffffff17", grid: "#262624",
 };
+// static assets in /public are served under basePath too; next/link auto-prefixes, raw urls don't.
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 function Reveal({ children, className = "", style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -52,7 +54,7 @@ function TargetIcon({ size = 42, color = C.accent }: { size?: number; color?: st
 const STEPS = [
   { icon: <VirusIcon />, n: "01", title: "The virus hijacks your cells", body: "A virus can't reproduce on its own. To copy itself, it grabs onto dozens of your own human proteins — the machinery it can't live without." },
   { icon: <TargetIcon />, n: "02", title: "Aquiles finds the weak point", body: "Claude reads the world's evidence — drug databases and millions of papers — and ranks which of those human proteins are both essential to the virus and hittable by a drug: the virus's Aquiles heel." },
-  { icon: <ShieldCheck size={42} color={C.good} strokeWidth={2} />, n: "03", title: "An independent AI checks everything", body: "The twist: a separate verifier re-checks every single claim against the original source data — catching the mistakes a self-checking AI would confidently keep." },
+  { icon: <ShieldCheck size={42} color={C.good} strokeWidth={2} />, n: "03", title: "An independent AI checks everything", body: "The twist: a separate verifier re-checks every single claim against the original source data — passing only what the record actually supports, and flagging the rest a self-checking AI would confidently keep." },
 ];
 
 const SOURCES: [string, string][] = [
@@ -80,7 +82,7 @@ export default function Landing() {
   };
   return (
     <div className="min-h-screen">
-      <audio ref={audioRef} src="/gen/ambient.wav" loop preload="none" />
+      <audio ref={audioRef} src={`${BASE}/gen/ambient.wav`} loop preload="none" />
       {/* nav */}
       <nav className="sticky top-0 z-20 backdrop-blur-md" style={{ background: "#0b0b0acc", borderBottom: `1px solid ${C.grid}` }}>
         <div className="mx-auto max-w-6xl px-5 h-14 flex items-center gap-2.5">
@@ -115,6 +117,9 @@ export default function Landing() {
             <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[14px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
               Launch Aquiles <ArrowRight size={17} />
             </Link>
+            <Link href="/app?tour=1" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[14px] font-medium" style={{ color: C.ink, border: `1px solid ${C.ring}`, background: "#ffffff08" }}>
+              <PlayCircle size={17} color={C.aqua} /> Take the guided tour
+            </Link>
             <a href="#how" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[14px] font-medium" style={{ color: C.ink2, border: `1px solid ${C.ring}` }}>
               See how it works
             </a>
@@ -126,7 +131,7 @@ export default function Landing() {
           </div>
         </div>
         <div className="relative h-[380px] lg:h-[460px] card overflow-hidden">
-          <div className="absolute inset-0" style={{ backgroundImage: "url(/gen/hero.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.6 }} />
+          <div className="absolute inset-0" style={{ backgroundImage: `url(${BASE}/gen/hero.png)`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.6 }} />
           <div className="absolute inset-0" style={{ background: "radial-gradient(130% 100% at 50% 0%, transparent 25%, #0c0c0b 90%)" }} />
           <DnaHelix className="absolute inset-0 h-full w-full" />
           <div className="absolute bottom-3 left-0 right-0 text-center text-[11px] mono" style={{ color: C.ink2 }}>
@@ -162,8 +167,9 @@ export default function Landing() {
               <b style={{ color: "#fff" }}>raw database record</b>, in isolation.
             </p>
             <p className="text-[14.5px] leading-relaxed" style={{ color: C.ink2 }}>
-              Across the current target set, the independent verifier <b style={{ color: C.warning }}>caught more than half</b> of
-              the AI’s own claims as unsupported — mistakes a self-checking system would have delivered as fact.
+              Across the current target set, the independent verifier <b style={{ color: C.warning }}>flagged 61%</b> of
+              the AI’s own claims — 68 of 111 — as not supported by the cited record (66) or in need of correction (2):
+              claims a self-checking system would have delivered as fact, unchecked.
             </p>
           </Reveal>
           <Reveal className="card p-6">
@@ -238,14 +244,19 @@ export default function Landing() {
       {/* final CTA */}
       <section className="mx-auto max-w-6xl px-5 pb-24 pt-6">
         <Reveal className="card p-10 text-center relative overflow-hidden">
-          <div className="absolute inset-0" style={{ backgroundImage: "url(/gen/cell.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.22 }} />
+          <div className="absolute inset-0" style={{ backgroundImage: `url(${BASE}/gen/cell.png)`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.22 }} />
           <div className="absolute inset-0" style={{ background: "radial-gradient(120% 120% at 50% 0%, rgba(15,26,20,0.4) 0%, #0c0c0b 82%)" }} />
           <div className="relative">
             <h2 className="display text-[30px] font-extrabold mb-2" style={{ textWrap: "balance" } as React.CSSProperties}>Ask the agent. Trust the evidence.</h2>
             <p className="text-[14px] mb-6 max-w-lg mx-auto" style={{ color: C.ink2 }}>See Claude reason over real biomedical data — with every claim independently verified in front of you.</p>
-            <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
-              Launch Aquiles <ArrowRight size={18} />
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/app" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold" style={{ background: C.accent, color: "#fff" }}>
+                Launch Aquiles <ArrowRight size={18} />
+              </Link>
+              <Link href="/app?tour=1" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-medium" style={{ color: C.ink, border: `1px solid ${C.ring}` }}>
+                <PlayCircle size={17} color={C.aqua} /> Guided tour with narration
+              </Link>
+            </div>
           </div>
         </Reveal>
         <div className="mt-8 text-center text-[11px]" style={{ color: C.muted }}>
